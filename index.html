@@ -321,6 +321,12 @@ body.show-controls .controlHint{opacity:0}
 @media(max-width:600px){.faceWall{grid-template-columns:repeat(6,1fr);gap:5px}.rosterGrid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.face,.personChip,.name .ch{opacity:1!important;transform:none!important;filter:none!important}.closingBg img{opacity:.5!important}.grain2,.backdrop{animation:none!important}}
 body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important;animation-delay:0s!important;transition:none!important}
+
+/* ===== V5 logo flow ===== */
+.logoFlow{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;transition:opacity 1.4s ease}
+.logoFlow.done{opacity:0}
+.opening.intro .face{animation-delay:calc(var(--i) * 22ms + 6.6s)}
+@media(max-width:980px){.logoFlow{opacity:.5}}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
@@ -823,6 +829,79 @@ document.querySelector('.controls').addEventListener('mouseleave',()=>{clearTime
 addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select'))return;if(e.key.toLowerCase()==='m')document.body.classList.toggle('calm');if(e.key==='Escape'||e.key.toLowerCase()==='h')showControls()});
 
 renderProfile();
+})();
+</script>
+<script id="v5-logo-flow">
+/* ===== V5 LOGO FLOW: 60 dòng sáng hợp thành logo Petrovietnam (canvas thuần, không cần thư viện) ===== */
+(function(){
+const opening=document.querySelector('.scene.opening');
+const cv=document.createElement('canvas');cv.className='logoFlow';cv.setAttribute('aria-hidden','true');
+opening.prepend(cv);
+const ctx=cv.getContext('2d');
+const STREAMS=60,PER=34;
+const palette=t=>{ // xanh PVN -> cyan -> xanh lá
+  const a=[53,65,133],b=[104,215,204],c=[0,190,95];
+  const [p,q,k]=t<.5?[a,b,t*2]:[b,c,(t-.5)*2];
+  return p.map((v,i)=>Math.round(v+(q[i]-v)*k));
+};
+let W=0,H=0,dpr=1,targets=[],parts=[],t0=0,raf=0,running=false;
+const logo=new Image();logo.src=document.querySelector('.brand img').src;
+
+function sampleLogo(){
+  const off=document.createElement('canvas'),s=160,ar=logo.naturalWidth/logo.naturalHeight||1.6;
+  off.width=Math.round(s*ar);off.height=s;const o=off.getContext('2d');
+  o.drawImage(logo,0,0,off.width,off.height);
+  const d=o.getImageData(0,0,off.width,off.height).data,pts=[];
+  for(let y=0;y<off.height;y+=2)for(let x=0;x<off.width;x+=2){const i=(y*off.width+x)*4;if(d[i+3]>140)pts.push([x/off.width,y/off.height])}
+  // đặt logo ở giữa phải, cao ~46% màn hình
+  const h=H*.46,w=h*ar,cx=W*.70,cy=H*.50;
+  return pts.map(([x,y])=>[cx-w/2+x*w,cy-h/2+y*h]);
+}
+function build(){
+  dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  targets=logo.complete&&logo.naturalWidth?sampleLogo():[];
+  parts=[];
+  for(let s=0;s<STREAMS;s++){
+    const col=palette(s/(STREAMS-1)),y0=H*(.08+.84*((s*37)%STREAMS)/STREAMS),amp=40+Math.random()*90,ph=Math.random()*6.28;
+    for(let k=0;k<PER;k++){
+      const tg=targets.length?targets[Math.floor(Math.random()*targets.length)]:[W*.7,H*.5];
+      parts.push({s,col,y0,amp,ph,tx:tg[0],ty:tg[1],delay:s*22+k*9+Math.random()*120,speed:.8+Math.random()*.5,
+        dx:(Math.random()-.5)*2,dy:(Math.random()-.5)*2,r:.8+Math.random()*1.4,x:-20,y:y0});
+    }
+  }
+}
+const ease=t=>t<0?0:t>1?1:1-Math.pow(1-t,3);
+function frame(now){
+  const t=now-t0;
+  ctx.globalCompositeOperation='destination-out';ctx.fillStyle='rgba(0,0,0,.22)';ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation='lighter';
+  for(const p of parts){
+    const lt=t-p.delay;if(lt<0)continue;
+    // dòng chảy dạng sóng từ trái sang
+    const fx=-20+lt*.55*p.speed,fy=p.y0+Math.sin(fx*.006+p.ph)*p.amp;
+    const conv=ease((lt-600)/1700);                 // hội tụ về logo
+    const out=ease((t-6200-p.delay*.3)/1800);        // tan ra thành nền
+    let x=fx+(p.tx-fx)*conv,y=fy+(p.ty-fy)*conv;
+    if(conv>=1){x+=Math.sin(now*.002+p.ph)*.6;y+=Math.cos(now*.0017+p.ph)*.6}
+    x+=p.dx*out*260+Math.sin(now*.0004+p.ph)*out*30;y+=p.dy*out*180;
+    const alpha=(.25+.75*conv)*(1-out*.8);
+    ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha})`;
+    ctx.beginPath();ctx.arc(x,y,p.r*(1+conv*.3),0,6.283);ctx.fill();
+  }
+  if(t>9500||scenes[currentScene]!==opening){stop(true);return}
+  raf=requestAnimationFrame(frame);
+}
+function stop(fade){running=false;cancelAnimationFrame(raf);opening.classList.remove('intro');if(fade)cv.classList.add('done');else ctx.clearRect(0,0,W,H)}
+function play(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||document.body.classList.contains('calm'))return;
+  cancelAnimationFrame(raf);build();ctx.clearRect(0,0,W,H);cv.classList.remove('done');
+  opening.classList.add('intro');running=true;t0=performance.now();raf=requestAnimationFrame(frame);
+}
+const act=activate;
+activate=function(i){act(i);if(scenes[i]===opening)play();else if(running)stop(false)};
+addEventListener('resize',()=>{if(running)build()});
+if(logo.complete)play();else logo.onload=play;
 })();
 </script></body>
 </html>

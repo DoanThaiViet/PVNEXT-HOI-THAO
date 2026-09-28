@@ -327,6 +327,12 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 .logoFlow.done{opacity:0}
 .opening.intro .face{animation-delay:calc(var(--i) * 22ms + 6.6s)}
 @media(max-width:980px){.logoFlow{opacity:.5}}
+
+/* Hồ sơ: neo khối chữ từ trên, không căn giữa theo độ dài nội dung -> tên không nhảy giữa các học viên */
+.profile{align-items:start;align-content:start;padding-top:max(120px,15vh)}
+.profileCopy{min-height:66vh;display:flex;flex-direction:column;justify-content:flex-start;padding-top:1vh}
+.storyText{font-size:clamp(13px,min(1.15vw,2.15vh),24px)}.studentMessage{font-size:clamp(12px,min(1.05vw,1.9vh),22px)}.name{font-size:clamp(30px,min(3.8vw,7vh),68px)}.keyword{font-size:clamp(22px,min(2.65vw,5vh),48px)}.profileStories .story{margin-top:min(12px,1.2vh);padding-top:min(12px,1.2vh)}
+@media(max-width:980px){.profileCopy{min-height:0}}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>

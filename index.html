@@ -640,7 +640,7 @@ function renderProfile(){
  const p=people[profileIndex];
  document.getElementById('pIndex').textContent=`${String(profileIndex+1).padStart(2,'0')} / ${people.length} · LỚP ${p.class}`;
  document.getElementById('pName').textContent=p.name.toUpperCase();
- document.getElementById('pUnit').textContent=[p.role,p.unit,p.stream&&'Stream '+p.stream].filter(Boolean).join(' · ');
+ document.getElementById('pUnit').textContent=[p.role,p.unit].filter(Boolean).join(' · ');
  document.getElementById('photoMain').dataset.initials=initials(p.name);
  document.getElementById('pKeyword').textContent=CODES.TK[p.tk]||'CHƯA CHỌN TỪ KHÓA';
  document.getElementById('storyHead').textContent='GIÁ TRỊ NHẬN ĐƯỢC';

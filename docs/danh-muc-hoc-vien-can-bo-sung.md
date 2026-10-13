@@ -1,7 +1,7 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
 *Nguồn đối chiếu: 20260925 - Thu thap thong tin.xlsx + thư mục 20260925 - Hinh anh hoc vien (OneDrive), ngày 13/10/2026*
 
-## A. Chưa nộp toàn bộ (thông tin + 02 ảnh) – 26 học viên
+## A. Chưa nộp toàn bộ (thông tin + 02 ảnh) – 24 học viên
 | Mã | Họ tên | Lớp | Đơn vị |
 |---|---|---|---|
 | HV003 | Trần Lê Chiến | 1 | VSP |
@@ -47,7 +47,7 @@
 | HV015 | Nguyễn Phương Nam | Thiếu **câu nhắn gửi** (không bắt buộc) | Bổ sung nếu muốn |
 | HV036 / HV057 | Nguyễn Bảo Đăng / Trần Đăng Tú | "Giá trị nhận được" **trùng nguyên văn** | Một trong hai người viết lại |
 | HV051 | Thân Huy Thanh | Ô "Cách vượt qua" lẫn cả thách thức ("…Cách vượt qua: …") | Tách lại đúng 2 ô |
-| HV028, HV057, HV031, HV025, HV009 | — | Vượt giới hạn số từ (GT ≤30, TT ≤40, nhắn gửi ≤15) | Rút gọn nếu cần đồng bộ hiển thị |
+| 24 học viên (vượt nhiều nhất: HV011, HV025, HV054, HV057, HV028, HV031, HV056) | — | Vượt giới hạn số từ theo hướng dẫn (Giá trị ≤30, Thách thức+Cách vượt qua ≤40, Nhắn gửi ≤15) | Rút gọn để thẻ hiển thị đồng đều; nếu BTC chấp nhận nội dung dài thì bỏ qua |
 
 ## D. Ảnh – thư mục đặt tên chưa đúng chuẩn `HVxxx_...`
 | Tên thư mục hiện tại | Mã đúng |

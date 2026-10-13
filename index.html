@@ -562,6 +562,14 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 .mosaicQuote{margin-top:10px;font:800 clamp(24px,2.8vw,52px)/1.2 var(--display);letter-spacing:-.03em;text-shadow:0 4px 30px rgba(0,15,28,.9)}
 @media(max-width:980px){.thanksHero,.thanksMentor{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.tCard{opacity:1!important;transform:none!important;animation:none!important}.mTile{transition:none!important}}
+
+.mThanks{position:absolute;inset:0;pointer-events:none}
+.tCol{position:absolute;top:clamp(96px,12vh,140px);bottom:clamp(110px,15vh,170px);width:clamp(240px,22vw,420px);display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,1.6vh,18px)}
+.tCol.L{left:clamp(16px,3vw,60px)}.tCol.R{right:clamp(16px,3vw,60px)}
+.tCard.pop{position:relative;opacity:0;transform:scale(.6);transition:opacity .5s,transform .7s cubic-bezier(.2,1.6,.4,1);animation:none!important;backdrop-filter:blur(6px);background:linear-gradient(145deg,rgba(14,40,70,.85),rgba(14,40,70,.6))}
+.tCard.pop.in{opacity:1;transform:none;box-shadow:0 0 30px rgba(104,215,204,.25)}
+.tCard.pop q{font-size:clamp(12px,.9vw,16px)}
+@media(max-width:980px){.tCol{display:none}}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="finder" hidden role="dialog" aria-label="Tìm học viên"><div class="fBox"><input id="fInput" type="search" placeholder="Gõ tên, đơn vị hoặc mã HV… (không cần dấu)" autocomplete="off"><div id="fList"></div></div></div><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
@@ -685,18 +693,8 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 
 
 <section class="scene summaryScene" data-label="TỔNG HỢP"><div class="summaryHeading"><div><div class="eyebrow">PETROVIETNAM NEXT 2025</div><h2>Tổng hợp hành trình</h2></div><select id="summaryClass" aria-label="Chọn lớp tổng hợp"><option value="0">Cả chương trình</option><option value="1">Lớp 1</option><option value="2">Lớp 2</option></select></div><p id="summaryStatus"></p><div id="summaryCharts"></div><p class="summaryNote">Tỷ lệ từng nhóm = số học viên chọn mã / số học viên đã có mã hợp lệ trong nhóm đó. Mỗi người chọn 1 mã GT, 1 mã TT và 1 mã TK. Nội dung còn thiếu không được suy diễn thành dữ liệu.</p></section>
-  <section class="scene thanksScene" data-label="TRI ÂN">
-    <div class="thanksInner">
-      <div class="eyebrow reveal r1">PETROVIETNAM NEXT 2025 · LỜI TRI ÂN</div>
-      <h2 class="thanksTitle reveal r2">Cảm ơn những người <span class="grad">đã đồng hành.</span></h2>
-      <div class="thanksHero" id="thanksHero"></div>
-      <div class="thanksSub reveal r3">TỪ HÀNH TRÌNH CÙNG MENTOR &amp; THẦY CÔ</div>
-      <div class="thanksMentor" id="thanksMentor"></div>
-      <div class="thanksTo reveal r4">Lãnh đạo Tập đoàn · Ban QTNL Petrovietnam · PV College · Ban tổ chức PV-NEXT · Mentor &amp; Giảng viên</div>
-    </div>
-  </section>
   <section class="scene mosaicScene" data-label="60 GƯƠNG MẶT">
-    <div class="mosaicStage" id="mosaicStage" aria-label="60 gương mặt học viên"></div>
+    <div class="mosaicStage" id="mosaicStage" aria-label="60 gương mặt học viên"></div><div class="mThanks" id="mThanks"></div>
     <div class="mosaicCaption" id="mosaicCaption"><div class="eyebrow">60 GƯƠNG MẶT · 02 LỚP · 01 HÀNH TRÌNH</div><div class="mosaicQuote">Mãi yêu <span class="grad">PV-NEXT</span> <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.3 4c2.3 0 3.8 1.3 5.7 3.4C13.9 5.3 15.4 4 17.7 4 21.8 4 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21z"/></svg></div></div>
   </section>
   <section class="scene closing" data-label="CLOSING">
@@ -832,7 +830,7 @@ function toggleAuto() {
   autoPlay = !autoPlay;
   document.getElementById("auto").textContent = autoPlay ? "❚❚ PAUSE" : "▶ AUTO";
   clearInterval(timer);
-  if (autoPlay) timer = setInterval(nextScene, 15000);
+  if (autoPlay) timer = setInterval(()=>{if(window.mosaicBusy&&window.mosaicBusy())return;nextScene()}, 15000);
 }
 
 document.getElementById("next").onclick = nextScene;
@@ -1237,11 +1235,10 @@ function card(p,text,d){return `<div class="tCard" style="--d:${d}"><q>${escapeH
 // Lời cảm ơn trực tiếp: lấy từ câu nhắn gửi có cảm ơn/biết ơn/tri ân
 const THANK=/cảm ơn|biết ơn|tri ân/i, MENTOR=/mentor|thầy cô|giảng viên/i;
 const MENTOR_IDS=['HV042','HV030','HV022','HV021','HV059','HV028'];
-function renderThanks(){
-  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,3);
-  document.getElementById('thanksHero').innerHTML=hero.map((p,i)=>card(p,p.message,i)).join('');
-  const pick=MENTOR_IDS.map(byId).filter(Boolean).map(p=>{const t=[p.solution,p.value,p.challenge].find(x=>MENTOR.test(x||''));return t&&{p,t}}).filter(Boolean).slice(0,6);
-  document.getElementById('thanksMentor').innerHTML=pick.map((x,i)=>card(x.p,x.t,hero.length+i*.5)).join('');
+function thanksCards(){
+  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,3).map(p=>card(p,p.message,0));
+  const ment=MENTOR_IDS.map(byId).filter(Boolean).map(p=>{const t=[p.solution,p.value,p.challenge].find(x=>MENTOR.test(x||''));return t&&card(p,t,0)}).filter(Boolean);
+  const out=[];hero.forEach((h,i)=>{out.push(h);if(ment[i])out.push(ment[i])});return out.concat(ment.slice(hero.length)).slice(0,8);
 }
 // Lấy 60 điểm tạo hình chữ "60"
 function shapePoints(n,w,h){
@@ -1253,11 +1250,12 @@ function shapePoints(n,w,h){
   const out=[pts[Math.floor(pts.length/2)]],dist=pts.map(q=>Infinity);
   while(out.length<n){const l=out[out.length-1];let bi=0,bd=-1;for(let i=0;i<pts.length;i++){const q=pts[i],dd=(q[0]-l[0])**2+(q[1]-l[1])**2;if(dd<dist[i])dist[i]=dd;if(dist[i]>bd){bd=dist[i];bi=i}}out.push(pts[bi])}
   const xs=out.map(q=>q[0]),ys=out.map(q=>q[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
-  const sc=Math.min(w*.62/(x1-x0||1),h*.58/(y1-y0||1));
-  return {pts:out.map(([x,y])=>[w/2+(x-(x0+x1)/2)*sc,h*.42+(y-(y0+y1)/2)*sc]),sc,mind:Math.sqrt(Math.min(...out.slice(1).map((q,i)=>Math.min(...out.filter((_,j)=>j!==i+1).map(r=>(q[0]-r[0])**2+(q[1]-r[1])**2)))))};
+  const sc=Math.min(w*.4/(x1-x0||1),h*.6/(y1-y0||1));
+  return {pts:out.map(([x,y])=>[w/2+(x-(x0+x1)/2)*sc,h*.44+(y-(y0+y1)/2)*sc]),sc,mind:Math.sqrt(Math.min(...out.slice(1).map((q,i)=>Math.min(...out.filter((_,j)=>j!==i+1).map(r=>(q[0]-r[0])**2+(q[1]-r[1])**2)))))};
 }
+let mosaicDoneAt=0;window.mosaicBusy=()=>performance.now()<mosaicDoneAt;
 const stage=document.getElementById('mosaicStage'),cap=document.getElementById('mosaicCaption');let timers=[];
-function clear(){timers.forEach(clearTimeout);timers=[];stage.classList.remove('formed');cap.classList.remove('show')}
+function clear(){timers.forEach(clearTimeout);timers=[];mosaicDoneAt=0;const mt=document.getElementById('mThanks');if(mt)mt.innerHTML='';stage.classList.remove('formed');cap.classList.remove('show')}
 function runMosaic(){
   clear();const w=stage.clientWidth,h=stage.clientHeight;if(!w)return;
   const list=[...people].sort((a,b)=>(!!assetImages[b.portrait])-(!!assetImages[a.portrait]));
@@ -1273,10 +1271,16 @@ function runMosaic(){
   order.forEach((ti,k)=>timers.push(setTimeout(()=>tiles[ti].classList.add('lit'),400+k*step)));
   const tForm=400+order.length*step+500;
   timers.push(setTimeout(()=>{tiles.forEach((t,i)=>{const [x,y]=sh.pts[i];t.style.transitionDelay=(reduce?0:(i%12)*0.04)+'s';t.style.transform=`translate(${x-size/2}px,${y-size/2}px) scale(1)`});stage.classList.add('formed')},tForm));
-  timers.push(setTimeout(()=>cap.classList.add('show'),tForm+(reduce?0:2900)));
+  const tCards=tForm+(reduce?0:3000),cards=thanksCards(),gap=reduce?0:1300;
+  const col=r=>cards.map((c,i)=>i%2===r?c.replace('class="tCard"','class="tCard pop"'):'').join('');
+  document.getElementById('mThanks').innerHTML=`<div class="tCol L">${col(0)}</div><div class="tCol R">${col(1)}</div>`;
+  const L=[...document.querySelectorAll('#mThanks .L .tCard')],R=[...document.querySelectorAll('#mThanks .R .tCard')],els=[];for(let i=0;i<Math.max(L.length,R.length);i++){if(L[i])els.push(L[i]);if(R[i])els.push(R[i])}
+  els.forEach((el,k)=>timers.push(setTimeout(()=>el.classList.add('in'),tCards+k*gap)));
+  const tEnd=tCards+els.length*gap+600;
+  timers.push(setTimeout(()=>cap.classList.add('show'),tEnd));
+  mosaicDoneAt=performance.now()+tEnd+4000;
 }
-renderThanks();
-const a=activate;activate=function(i){a(i);const l=scenes[i].dataset.label;if(l==='TRI ÂN')renderThanks();if(l==='60 GƯƠNG MẶT')requestAnimationFrame(runMosaic);else clear()};
+const a=activate;activate=function(i){a(i);const l=scenes[i].dataset.label;if(l==='60 GƯƠNG MẶT')requestAnimationFrame(runMosaic);else clear()};
 addEventListener('resize',()=>{if(scenes[currentScene].dataset.label==='60 GƯƠNG MẶT')runMosaic()});
 })();
 </script>

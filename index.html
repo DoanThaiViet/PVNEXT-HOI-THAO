@@ -526,6 +526,42 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 .allScene .personChip span{font-size:var(--fu,11px)!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;display:block!important;margin:0!important}
 .allScene .rosterCard{height:auto!important;max-height:calc(100vh - 150px);overflow:hidden}
 .personChip.spot{transform:scale(1.04)!important}
+
+/* Tri ân */
+.thanksScene{display:grid;place-items:center}
+.thanksInner{width:min(1280px,100%);text-align:center}
+.thanksTitle{font:800 clamp(30px,3.6vw,64px)/1.15 var(--display);letter-spacing:-.04em;margin:10px 0 clamp(16px,2.4vh,30px);padding:.08em 0}
+.thanksHero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.2vw,20px)}
+.tCard{position:relative;text-align:left;padding:clamp(14px,1.8vh,24px) clamp(14px,1.3vw,24px);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid rgba(104,215,204,.28);opacity:0;transform:translateY(24px)}
+.thanksScene.active .tCard{animation:tIn .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.9s + var(--d)*.55s)}
+@keyframes tIn{to{opacity:1;transform:none}}
+.tCard q{display:block;font:600 clamp(15px,1.25vw,23px)/1.5 var(--display);color:#EEF5FF;quotes:"“" "”"}
+.tWho{display:flex;align-items:center;gap:10px;margin-top:12px;font:600 clamp(11px,.8vw,14px)/1.3 var(--display);color:rgba(238,245,255,.7)}
+.tWho b{color:#fff;display:block}
+.tAv{flex:none;width:clamp(34px,2.6vw,48px);aspect-ratio:1;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:rgba(104,215,204,.18);font:700 13px var(--display);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.tAv img{width:100%;height:100%;object-fit:cover}
+.thanksSub{margin:clamp(18px,3vh,36px) 0 12px;font:600 clamp(10px,.75vw,13px)/1 var(--mono);letter-spacing:.28em;color:rgba(104,215,204,.9)}
+.thanksMentor{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,.9vw,14px)}
+.thanksMentor .tCard{border-color:rgba(255,255,255,.1);padding:12px 16px}
+.thanksMentor .tCard q{font-size:clamp(12px,.9vw,16px);font-weight:500;color:rgba(238,245,255,.88)}
+.thanksMentor .tWho{margin-top:8px}
+.thanksTo{margin-top:clamp(18px,3vh,34px);font:700 clamp(12px,1vw,18px)/1.5 var(--display);color:#5ED290;letter-spacing:.02em}
+/* 60 gương mặt */
+.mosaicScene{padding:0;overflow:hidden}
+.mosaicStage{position:absolute;inset:0}
+.mTile{position:absolute;left:0;top:0;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(104,215,204,.35),rgba(14,40,70,.9));border:1px solid rgba(255,255,255,.28);color:#fff;font:700 clamp(9px,.8vw,15px)/1 var(--display);opacity:0;filter:brightness(.25);transition:transform 2.6s cubic-bezier(.7,0,.2,1),opacity .6s,filter .6s,box-shadow .6s;will-change:transform}
+.mTile img{width:100%;height:100%;object-fit:cover}
+.mTile.lit{opacity:1;filter:none;box-shadow:0 0 18px rgba(104,215,204,.55)}
+.mosaicStage.formed .mTile{box-shadow:0 0 14px rgba(94,210,144,.6)}
+.mosaicCaption{position:absolute;left:0;right:0;bottom:clamp(40px,8vh,90px);text-align:center;opacity:0;transform:translateY(20px);transition:opacity 1.2s,transform 1.2s;pointer-events:none}
+.heart{width:.9em;height:.9em;vertical-align:-.08em;fill:#ff5d7a;filter:drop-shadow(0 0 14px rgba(255,93,122,.7))}
+.mosaicCaption.show .heart{animation:beat 1.2s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+.heart{transform-origin:center;transform-box:fill-box}
+.mosaicCaption.show{opacity:1;transform:none}
+.mosaicQuote{margin-top:10px;font:800 clamp(24px,2.8vw,52px)/1.2 var(--display);letter-spacing:-.03em;text-shadow:0 4px 30px rgba(0,15,28,.9)}
+@media(max-width:980px){.thanksHero,.thanksMentor{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.tCard{opacity:1!important;transform:none!important;animation:none!important}.mTile{transition:none!important}}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="finder" hidden role="dialog" aria-label="Tìm học viên"><div class="fBox"><input id="fInput" type="search" placeholder="Gõ tên, đơn vị hoặc mã HV… (không cần dấu)" autocomplete="off"><div id="fList"></div></div></div><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
@@ -649,6 +685,20 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 
 
 <section class="scene summaryScene" data-label="TỔNG HỢP"><div class="summaryHeading"><div><div class="eyebrow">PETROVIETNAM NEXT 2025</div><h2>Tổng hợp hành trình</h2></div><select id="summaryClass" aria-label="Chọn lớp tổng hợp"><option value="0">Cả chương trình</option><option value="1">Lớp 1</option><option value="2">Lớp 2</option></select></div><p id="summaryStatus"></p><div id="summaryCharts"></div><p class="summaryNote">Tỷ lệ từng nhóm = số học viên chọn mã / số học viên đã có mã hợp lệ trong nhóm đó. Mỗi người chọn 1 mã GT, 1 mã TT và 1 mã TK. Nội dung còn thiếu không được suy diễn thành dữ liệu.</p></section>
+  <section class="scene thanksScene" data-label="TRI ÂN">
+    <div class="thanksInner">
+      <div class="eyebrow reveal r1">PETROVIETNAM NEXT 2025 · LỜI TRI ÂN</div>
+      <h2 class="thanksTitle reveal r2">Cảm ơn những người <span class="grad">đã đồng hành.</span></h2>
+      <div class="thanksHero" id="thanksHero"></div>
+      <div class="thanksSub reveal r3">TỪ HÀNH TRÌNH CÙNG MENTOR &amp; THẦY CÔ</div>
+      <div class="thanksMentor" id="thanksMentor"></div>
+      <div class="thanksTo reveal r4">Lãnh đạo Tập đoàn · Ban QTNL Petrovietnam · PV College · Ban tổ chức PV-NEXT · Mentor &amp; Giảng viên</div>
+    </div>
+  </section>
+  <section class="scene mosaicScene" data-label="60 GƯƠNG MẶT">
+    <div class="mosaicStage" id="mosaicStage" aria-label="60 gương mặt học viên"></div>
+    <div class="mosaicCaption" id="mosaicCaption"><div class="eyebrow">60 GƯƠNG MẶT · 02 LỚP · 01 HÀNH TRÌNH</div><div class="mosaicQuote">Mãi yêu <span class="grad">PV-NEXT</span> <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.3 4c2.3 0 3.8 1.3 5.7 3.4C13.9 5.3 15.4 4 17.7 4 21.8 4 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21z"/></svg></div></div>
+  </section>
   <section class="scene closing" data-label="CLOSING">
     <div class="closingBg" aria-hidden="true"><img src="assets/tap-the.jpg" alt=""></div>
     <div class="closingInner">
@@ -1176,5 +1226,59 @@ function fit(){wrap();const card=g.closest('.rosterCard');if(innerWidth<=980){g.
  g.style.setProperty('--fn',Math.max(11,best.s).toFixed(1)+'px');g.style.setProperty('--fu',Math.max(9,best.s*.72).toFixed(1)+'px')}
 addEventListener('resize',fit);const a=activate;activate=function(i){a(i);if(scenes[i].contains(g))requestAnimationFrame(fit)};fit();
 })();
-</script></body>
+</script>
+<script>
+/* Tri ân + 60 gương mặt */
+(function(){
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const byId=id=>people.find(p=>p.id===id);
+function av(p){const img=assetImages[p.portrait];return `<span class="tAv">${img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name))}</span>`}
+function card(p,text,d){return `<div class="tCard" style="--d:${d}"><q>${escapeHtml(text)}</q><div class="tWho">${av(p)}<span><b>${escapeHtml(p.name)}</b>${escapeHtml(p.unit)}</span></div></div>`}
+// Lời cảm ơn trực tiếp: lấy từ câu nhắn gửi có cảm ơn/biết ơn/tri ân
+const THANK=/cảm ơn|biết ơn|tri ân/i, MENTOR=/mentor|thầy cô|giảng viên/i;
+const MENTOR_IDS=['HV042','HV030','HV022','HV021','HV059','HV028'];
+function renderThanks(){
+  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,3);
+  document.getElementById('thanksHero').innerHTML=hero.map((p,i)=>card(p,p.message,i)).join('');
+  const pick=MENTOR_IDS.map(byId).filter(Boolean).map(p=>{const t=[p.solution,p.value,p.challenge].find(x=>MENTOR.test(x||''));return t&&{p,t}}).filter(Boolean).slice(0,6);
+  document.getElementById('thanksMentor').innerHTML=pick.map((x,i)=>card(x.p,x.t,hero.length+i*.5)).join('');
+}
+// Lấy 60 điểm tạo hình chữ "60"
+function shapePoints(n,w,h){
+  const c=document.createElement('canvas'),W=240,H=140;c.width=W;c.height=H;const g=c.getContext('2d');
+  g.fillStyle='#000';g.font='300 132px "Be Vietnam Pro",Arial,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('60',W/2,H/2+6);
+  const d=g.getImageData(0,0,W,H).data,pts=[];
+  for(let y=0;y<H;y+=2)for(let x=0;x<W;x+=2)if(d[(y*W+x)*4+3]>128)pts.push([x,y]);
+  if(!pts.length)return [];
+  const out=[pts[Math.floor(pts.length/2)]],dist=pts.map(q=>Infinity);
+  while(out.length<n){const l=out[out.length-1];let bi=0,bd=-1;for(let i=0;i<pts.length;i++){const q=pts[i],dd=(q[0]-l[0])**2+(q[1]-l[1])**2;if(dd<dist[i])dist[i]=dd;if(dist[i]>bd){bd=dist[i];bi=i}}out.push(pts[bi])}
+  const xs=out.map(q=>q[0]),ys=out.map(q=>q[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const sc=Math.min(w*.62/(x1-x0||1),h*.58/(y1-y0||1));
+  return {pts:out.map(([x,y])=>[w/2+(x-(x0+x1)/2)*sc,h*.42+(y-(y0+y1)/2)*sc]),sc,mind:Math.sqrt(Math.min(...out.slice(1).map((q,i)=>Math.min(...out.filter((_,j)=>j!==i+1).map(r=>(q[0]-r[0])**2+(q[1]-r[1])**2)))))};
+}
+const stage=document.getElementById('mosaicStage'),cap=document.getElementById('mosaicCaption');let timers=[];
+function clear(){timers.forEach(clearTimeout);timers=[];stage.classList.remove('formed');cap.classList.remove('show')}
+function runMosaic(){
+  clear();const w=stage.clientWidth,h=stage.clientHeight;if(!w)return;
+  const list=[...people].sort((a,b)=>(!!assetImages[b.portrait])-(!!assetImages[a.portrait]));
+  const sh=shapePoints(list.length,w,h);if(!sh.pts)return;
+  const size=Math.max(26,Math.min(90,sh.mind*sh.sc*.92));
+  // gán người có ảnh vào vị trí gần tâm từng nét để chữ rõ
+  stage.innerHTML='';
+  const tiles=list.map((p,i)=>{const t=document.createElement('div');t.className='mTile';t.style.width=t.style.height=size+'px';t.title=p.name;
+    const img=assetImages[p.portrait];t.innerHTML=img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name));
+    const sx=Math.random()*(w-size),sy=Math.random()*(h*.75-size);t.style.transform=`translate(${sx}px,${sy}px) scale(.9)`;stage.append(t);return t});
+  const order=tiles.map((_,i)=>i).sort(()=>Math.random()-.5);
+  const step=reduce?0:110;
+  order.forEach((ti,k)=>timers.push(setTimeout(()=>tiles[ti].classList.add('lit'),400+k*step)));
+  const tForm=400+order.length*step+500;
+  timers.push(setTimeout(()=>{tiles.forEach((t,i)=>{const [x,y]=sh.pts[i];t.style.transitionDelay=(reduce?0:(i%12)*0.04)+'s';t.style.transform=`translate(${x-size/2}px,${y-size/2}px) scale(1)`});stage.classList.add('formed')},tForm));
+  timers.push(setTimeout(()=>cap.classList.add('show'),tForm+(reduce?0:2900)));
+}
+renderThanks();
+const a=activate;activate=function(i){a(i);const l=scenes[i].dataset.label;if(l==='TRI ÂN')renderThanks();if(l==='60 GƯƠNG MẶT')requestAnimationFrame(runMosaic);else clear()};
+addEventListener('resize',()=>{if(scenes[currentScene].dataset.label==='60 GƯƠNG MẶT')runMosaic()});
+})();
+</script>
+</body>
 </html>

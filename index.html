@@ -391,7 +391,7 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 .summaryHeading h2{font-size:clamp(28px,min(3.4vw,6vh),64px);margin:6px 0 0;letter-spacing:-.03em;background:linear-gradient(90deg,#fff,#cfe0ff 45%,#6fe0b6);-webkit-background-clip:text;color:transparent}
 .summaryHeading select{border-radius:999px;padding:10px 18px;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.25)}
 #summaryStatus,.summaryNote{display:none}
-.sumKpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1vw,16px)}
+.sumKpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(8px,1vw,16px)}
 .kpi{position:relative;padding:clamp(12px,1.6vh,20px) clamp(14px,1.2vw,22px);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);overflow:hidden}
 .kpi small{display:block;font:600 clamp(9px,.7vw,13px)/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#8fa6ba}
 .kpi b{display:block;margin-top:4px;font:800 clamp(28px,min(3vw,5.4vh),58px)/1.05 var(--display);letter-spacing:-.03em;background:linear-gradient(180deg,#fff,#bfe9dd);-webkit-background-clip:text;color:transparent}
@@ -1110,8 +1110,6 @@ renderSummary=function(){
   const root=document.getElementById('summaryCharts');root.style.display='contents';
   root.innerHTML=`<div class="sumKpis">
    <div class="kpi"><small>Học viên</small><b>${list.length}</b></div>
-   <div class="kpi"><small>Đã nộp đủ nội dung</small><b>${complete}<i>/ ${list.length}</i></b><div class="ring" style="--p:${pct}"></div></div>
-   <div class="kpi"><small>Đã có ảnh</small><b>${withPhoto}<i>/ ${list.length}</i></b></div>
    <div class="kpi hot"><small>Từ khóa dẫn đầu</small><b>${top.people.length?TKC[top.c]:'—'}</b></div>
   </div>
   <div class="sumBody">

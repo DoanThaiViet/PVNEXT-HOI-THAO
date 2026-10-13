@@ -962,10 +962,30 @@ function stopAmbient() {
   document.getElementById("sound").textContent = "♫ SOUND";
 }
 
-document.getElementById("sound").onclick = async () => {
-  if (!soundOn) startAmbient();
-  else stopAmbient();
-};
+/* Nhạc nền: dùng assets/nhac-nen.mp3 nếu có, không có thì dùng âm thanh tự tạo */
+const bgMusic = new Audio("assets/nhac-nen.mp3");
+bgMusic.loop = true; bgMusic.preload = "auto"; bgMusic.volume = 0;
+let musicOk = true; bgMusic.onerror = () => { musicOk = false; };
+let fadeT = null;
+function fadeMusic(to, ms) {
+  clearInterval(fadeT); const from = bgMusic.volume, t0 = performance.now();
+  fadeT = setInterval(() => { const k = Math.min((performance.now() - t0) / ms, 1);
+    bgMusic.volume = from + (to - from) * k;
+    if (k >= 1) { clearInterval(fadeT); if (to === 0) bgMusic.pause(); } }, 50);
+}
+function setSoundBtn(on) {
+  soundOn = on; const b = document.getElementById("sound");
+  b.classList.toggle("is-on", on); b.textContent = on ? "♫ SOUND ON" : "♫ SOUND";
+}
+async function startSound() {
+  if (musicOk) {
+    try { await bgMusic.play(); fadeMusic(0.6, 2500); setSoundBtn(true); return; } catch (e) { musicOk = false; }
+  }
+  startAmbient();
+}
+function stopSound() { if (!bgMusic.paused) { fadeMusic(0, 1200); setSoundBtn(false); } else stopAmbient(); }
+document.getElementById("sound").onclick = () => { if (!soundOn) startSound(); else stopSound(); };
+document.getElementById("auto").addEventListener("click", () => { if (autoPlay && !soundOn) startSound(); });
 </script>
 <script>
 document.getElementById('home').onclick=()=>{if(autoPlay)toggleAuto();activate(0)};

@@ -1256,7 +1256,7 @@ function card(p,text,d){return `<div class="tCard" style="--d:${d}"><q>${escapeH
 const THANK=/cảm ơn|biết ơn|tri ân/i, MENTOR=/mentor|thầy cô|giảng viên/i;
 const MENTOR_IDS=['HV042','HV030','HV022','HV021','HV059','HV028'];
 function thanksCards(){
-  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,3).map(p=>card(p,p.message,0));
+  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,4).map(p=>card(p,p.message,0));
   const ment=MENTOR_IDS.map(byId).filter(Boolean).map(p=>{const t=[p.solution,p.value,p.challenge].find(x=>MENTOR.test(x||''));return t&&card(p,t,0)}).filter(Boolean);
   const out=[];hero.forEach((h,i)=>{out.push(h);if(ment[i])out.push(ment[i])});return out.concat(ment.slice(hero.length)).slice(0,8);
 }

@@ -570,6 +570,8 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 .tCard.pop.in{opacity:1;transform:none;box-shadow:0 0 30px rgba(104,215,204,.25)}
 .tCard.pop q{font-size:clamp(12px,.9vw,16px)}
 @media(max-width:980px){.tCol{display:none}}
+
+body.mosaicOn .top{justify-content:center}body.mosaicOn .brandMeta,body.mosaicOn .counter{display:none}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="finder" hidden role="dialog" aria-label="Tìm học viên"><div class="fBox"><input id="fInput" type="search" placeholder="Gõ tên, đơn vị hoặc mã HV… (không cần dấu)" autocomplete="off"><div id="fList"></div></div></div><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
@@ -1300,7 +1302,7 @@ function runMosaic(){
   timers.push(setTimeout(()=>cap.classList.add('show'),tEnd));
   mosaicDoneAt=performance.now()+tEnd+4000;
 }
-const a=activate;activate=function(i){a(i);const l=scenes[i].dataset.label;if(l==='60 GƯƠNG MẶT')requestAnimationFrame(runMosaic);else clear()};
+const a=activate;activate=function(i){a(i);const l=scenes[i].dataset.label;document.body.classList.toggle('mosaicOn',l==='60 GƯƠNG MẶT');if(l==='60 GƯƠNG MẶT')requestAnimationFrame(runMosaic);else clear()};
 addEventListener('resize',()=>{if(scenes[currentScene].dataset.label==='60 GƯƠNG MẶT')runMosaic()});
 })();
 </script>

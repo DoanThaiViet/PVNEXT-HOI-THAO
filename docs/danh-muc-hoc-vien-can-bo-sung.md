@@ -1,66 +1,47 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
-*Nguồn đối chiếu: 20260925 - Thu thap thong tin.xlsx + thư mục 20260925 - Hinh anh hoc vien (OneDrive), ngày 13/10/2026*
+*Cập nhật ngày 23/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản sửa 23/10) và thư mục ảnh học viên trên OneDrive.*
 
-## A. Chưa nộp toàn bộ (thông tin + 02 ảnh) – 24 học viên
-| Mã | Họ tên | Lớp | Đơn vị |
+**Tình trạng chung:** 49/60 học viên đã đủ thông tin và ảnh; **11 học viên** còn thiếu.
+
+## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 3 học viên
+| Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
+|---|---|---|---|---|
+| HV017 | Nguyễn Vũ Quang | 1 | PVEP | Toàn bộ thông tin + 02 ảnh |
+| HV032 | Bùi Ngọc Ấn | 2 | PVPMB | Toàn bộ thông tin + 02 ảnh |
+| HV041 | Nguyễn Thế Huy | 2 | VSP | Toàn bộ thông tin + 02 ảnh |
+
+*"Toàn bộ thông tin" gồm: chức danh; giá trị nhận được (mã GT + câu); thách thức (mã TT + nội dung); cách vượt qua; từ khóa hành trình (mã TK); câu nhắn gửi (không bắt buộc).*
+
+## B. Đã có ảnh, chưa có thông tin – 1 học viên
+| Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
+|---|---|---|---|---|
+| HV060 | Lê Minh Vương | 2 | PVCollege | Toàn bộ thông tin (đã có 02 ảnh ngày 23/10) |
+
+## C. Đã có thông tin, thiếu ảnh – 2 học viên
+| Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
+|---|---|---|---|---|
+| HV033 | Nguyễn Đức Anh | 2 | PTSC | Ảnh chân dung + ảnh hoạt động (thư mục OneDrive đang trống) |
+| HV007 | Nguyễn Việt Hưng | 1 | PTSC | Ảnh hoạt động |
+
+## D. Thiếu một phần nội dung – 5 học viên
+| Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
+|---|---|---|---|---|
+| HV035 | Trần Linh Chi | 2 | PVPGB | Đã chọn mã GT1/TT1/TK3 nhưng **chưa viết**: giá trị nhận được, thách thức, cách vượt qua, câu nhắn gửi |
+| HV006 | Nguyễn Khánh Hiếu | 1 | PVCollege | Chức danh |
+| HV047 | Vũ Lê Quốc | 2 | PVPGB | Mã từ khóa hành trình (chọn 1 trong TK1–TK5) |
+| HV015 | Nguyễn Phương Nam | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
+| HV016 | Vương Minh Quân | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
+
+## E. Cần học viên xác nhận lại nội dung
+| Mã | Họ tên | Vấn đề | Đề nghị |
 |---|---|---|---|
-| HV003 | Trần Lê Chiến | 1 | VSP |
-| HV005 | Trần Ngân Hà | 1 | PTSC |
-| HV007 | Nguyễn Việt Hưng | 1 | PTSC |
-| HV010 | Trần Hữu Kiên | 1 | Petrovietnam |
-| HV012 | Phan Việt Linh | 1 | PTSC |
-| HV014 | Trần Thanh Minh | 1 | PVGAS |
-| HV016 | Vương Minh Quân | 1 | PTSC |
-| HV017 | Nguyễn Vũ Quang | 1 | PVEP |
-| HV026 | Lưu Minh Tuân | 1 | VSP |
-| HV029 | Nguyễn Tiến Vũ | 1 | VSP |
-| HV032 | Bùi Ngọc Ấn | 2 | PVPMB |
-| HV033 | Nguyễn Đức Anh | 2 | PTSC |
-| HV037 | Bùi Văn Điệp | 2 | PVD |
-| HV041 | Nguyễn Thế Huy | 2 | VSP |
-| HV043 | Nguyễn Tuấn Minh | 2 | VSP |
-| HV044 | Nguyễn Thị Lan Ngọc | 2 | PQPOC |
-| HV045 | Bùi Thành Nguyên | 2 | BĐPOC |
-| HV046 | Trần Viết Quang | 2 | VSP |
-| HV047 | Vũ Lê Quốc | 2 | PVPGB |
-| HV050 | Phạm Thành Tài | 2 | VSP |
-| HV052 | Nguyễn Minh Thịnh | 2 | PVEP |
-| HV055 | Hoàng Thị Quỳnh Trang | 2 | Petrovietnam |
-| HV058 | Đặng Sơn Tùng | 2 | VSP |
-| HV060 | Lê Minh Vương | 2 | PVCollege |
+| HV036 / HV057 | Nguyễn Bảo Đăng / Trần Đăng Tú | "Giá trị nhận được" trùng nguyên văn | Một trong hai bạn viết lại |
+| HV042 / HV043 | Nguyễn Thị Liên / Nguyễn Tuấn Minh | "Câu nhắn gửi" trùng nguyên văn | Một trong hai bạn viết lại |
+| HV027 | Trịnh Hữu Tùng | "Cách vượt qua" đang ghi "…không nhận các công việc… không quen thuộc…" – ngược ý | Xác nhận lại (dự kiến "không ngại nhận") |
 
-## B. Đã có thông tin nhưng CHƯA CÓ ẢNH (chân dung + hoạt động)
-| Mã | Họ tên | Đơn vị | Cần bổ sung |
-|---|---|---|---|
-| HV004 | Trần Duy Dũng | PVPower | 02 ảnh; chức danh đã có |
-| HV006 | Nguyễn Khánh Hiếu | PVCollege | 02 ảnh; **chức danh** |
-| HV020 | Nguyễn Thanh Tân | PVGAS | 02 ảnh; **toàn bộ nội dung viết** (xem mục C) |
-| HV027 | Trịnh Hữu Tùng | BĐPOC | 02 ảnh; **mã TK** (xem mục C) |
-
-## C. Đã nộp nhưng thiếu / chưa hợp lệ
-| Mã | Họ tên | Thiếu / sai | Đề nghị |
-|---|---|---|---|
-| HV019 | Trần Văn Sang | Thiếu **mã TT** | Chọn 1 mã TT1–TT6 |
-| HV027 | Trịnh Hữu Tùng | Thiếu **mã TK**; câu "Cách vượt qua" đang ghi "không nhận các công việc… không quen thuộc" – ngược ý | Chọn mã TK; xác nhận lại câu (dự kiến "không ngại nhận") |
-| HV020 | Nguyễn Thanh Tân | Có mã GT1/TT1/TK3 nhưng **trống** Giá trị, Thách thức, Cách vượt qua, Nhắn gửi | Bổ sung nội dung hoặc xác nhận rút mã |
-| HV035 | Trần Linh Chi | Có mã GT1/TT1/TK3 nhưng **trống** toàn bộ nội dung viết | Như trên |
-| HV015 | Nguyễn Phương Nam | Thiếu **câu nhắn gửi** (không bắt buộc) | Bổ sung nếu muốn |
-| HV036 / HV057 | Nguyễn Bảo Đăng / Trần Đăng Tú | "Giá trị nhận được" **trùng nguyên văn** | Một trong hai người viết lại |
-| HV051 | Thân Huy Thanh | Ô "Cách vượt qua" lẫn cả thách thức ("…Cách vượt qua: …") | Tách lại đúng 2 ô |
-| 24 học viên (vượt nhiều nhất: HV011, HV025, HV054, HV057, HV028, HV031, HV056) | — | Vượt giới hạn số từ theo hướng dẫn (Giá trị ≤30, Thách thức+Cách vượt qua ≤40, Nhắn gửi ≤15) | Rút gọn để thẻ hiển thị đồng đều; nếu BTC chấp nhận nội dung dài thì bỏ qua |
-
-## D. Ảnh – thư mục đặt tên chưa đúng chuẩn `HVxxx_...`
-| Tên thư mục hiện tại | Mã đúng |
-|---|---|
-| Lop 1 - Bui Lan Anh - PVTrans | HV001 |
-| Lớp 1_HV25109_Trần Anh Khoa | HV009 |
-| LỚP 2_25206_Nguyễn Bảo Đăng | HV036 |
-| LOP 2_25212_Nguyễn Thị Liên | HV042 |
-| LOP 2_ HV 25226_PHAM VAN TRUNG | HV056 |
-| LỚP 2_25227_TRẦN ĐĂNG TÚ | HV057 |
-| LOP 2_BUI NHAN DUC_PTSC_POS | HV038 |
-| LOP 2_LE QUOC BAO_BSR | HV002 |
-| LOP_2_NGUYEN CHI BAO BSR | HV034 |
-
-*Lưu ý: HV002 (Lê Quốc Bảo) thuộc Lớp 1 theo Excel nhưng thư mục ảnh ghi "LOP 2" – cần xác nhận.*
-Cột `Anh_chan_dung`, `Anh_hoat_dong` trong Excel đang trống toàn bộ – Ban tổ chức cần điền tên file.
+## Bảng mã tham chiếu
+- **GT – Giá trị nhận được:** GT1 Tư duy và nhận thức · GT2 Năng lực chuyên môn · GT3 Kỹ năng quản lý, lãnh đạo · GT4 Phương pháp làm việc · GT5 Mạng lưới và khả năng kết nối · GT6 Định hướng phát triển nghề nghiệp
+- **TT – Thách thức:** TT1 Thay đổi tư duy hoặc thói quen làm việc · TT2 Sắp xếp thời gian giữa học tập và công việc · TT3 Áp dụng kiến thức vào thực tiễn · TT4 Đảm nhận nhiệm vụ hoặc vai trò mới · TT5 Nâng cao năng lực quản lý, lãnh đạo · TT6 Chủ động kết nối và học hỏi từ mentor
+- **TK – Từ khóa hành trình:** TK1 Chủ động · TK2 Kỷ luật · TK3 Kết nối · TK4 Bứt phá · TK5 Trách nhiệm
+- **Giới hạn độ dài:** Giá trị ≤ 30 từ · Thách thức + Cách vượt qua ≤ 40 từ · Nhắn gửi ≤ 15 từ
+- **Ảnh:** ảnh gốc, rõ mặt; đặt tên `HVxxx_chandung.jpg` và `HVxxx_hoatdong.jpg`

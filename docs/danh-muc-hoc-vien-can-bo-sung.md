@@ -1,7 +1,7 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
-*Cập nhật ngày 23/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản sửa 23/10) và thư mục ảnh học viên trên OneDrive.*
+*Cập nhật ngày 23/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản đồng bộ 23/10, 15:52) và thư mục ảnh học viên trên OneDrive.*
 
-**Tình trạng chung:** 50/60 học viên đã đủ thông tin và ảnh; **10 học viên** còn thiếu.
+**Tình trạng chung:** 52/60 học viên đã đủ thông tin và ảnh; **8 học viên** còn thiếu.
 
 ## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 2 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
@@ -14,20 +14,18 @@
 ## B. Đã có ảnh, chưa có thông tin – 1 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
-| HV060 | Lê Minh Vương | 2 | PVCollege | Toàn bộ thông tin (đã có 02 ảnh ngày 23/10) |
+| HV060 | Lê Minh Vương | 2 | PVCollege | Toàn bộ thông tin (đã có ảnh chân dung + ảnh hoạt động) |
 
-## C. Đã có thông tin, thiếu ảnh – 2 học viên
+## C. Đã có thông tin, thiếu ảnh – 1 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
-| HV033 | Nguyễn Đức Anh | 2 | PTSC | Ảnh chân dung + ảnh hoạt động (thư mục OneDrive đang trống) |
 | HV007 | Nguyễn Việt Hưng | 1 | PTSC | Ảnh hoạt động |
 
-## D. Thiếu một phần nội dung – 5 học viên
+## D. Thiếu một phần nội dung – 4 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
 | HV035 | Trần Linh Chi | 2 | PVPGB | Đã chọn mã GT1/TT1/TK3 nhưng **chưa viết**: giá trị nhận được, thách thức, cách vượt qua, câu nhắn gửi |
 | HV006 | Nguyễn Khánh Hiếu | 1 | PVCollege | Chức danh |
-| HV047 | Vũ Lê Quốc | 2 | PVPGB | Mã từ khóa hành trình (chọn 1 trong TK1–TK5) |
 | HV015 | Nguyễn Phương Nam | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
 | HV016 | Vương Minh Quân | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
 

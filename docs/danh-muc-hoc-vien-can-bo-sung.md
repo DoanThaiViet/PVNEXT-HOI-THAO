@@ -1,24 +1,23 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
-*Cập nhật ngày 23/10/2026. Đối chiếu dữ liệu trên trang với file `20260925 - Thu thap thong tin.xlsx` và thư mục ảnh học viên trên OneDrive.*
+*Cập nhật ngày 23/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản sửa 23/10) và thư mục ảnh học viên trên OneDrive.*
 
-**Tình trạng chung:** 45/60 học viên đã đủ thông tin và ảnh; **15 học viên** còn thiếu.
+**Tình trạng chung:** 46/60 học viên đã đủ thông tin và ảnh; **14 học viên** còn thiếu.
 
-## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 6 học viên
+## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 4 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
 | HV017 | Nguyễn Vũ Quang | 1 | PVEP | Toàn bộ thông tin + 02 ảnh |
 | HV032 | Bùi Ngọc Ấn | 2 | PVPMB | Toàn bộ thông tin + 02 ảnh |
 | HV041 | Nguyễn Thế Huy | 2 | VSP | Toàn bộ thông tin + 02 ảnh |
-| HV044 | Nguyễn Thị Lan Ngọc | 2 | PQPOC | Toàn bộ thông tin + 02 ảnh |
-| HV058 | Đặng Sơn Tùng | 2 | VSP | Toàn bộ thông tin + 02 ảnh |
 | HV060 | Lê Minh Vương | 2 | PVCollege | Toàn bộ thông tin + 02 ảnh |
 
 *"Toàn bộ thông tin" gồm: chức danh; giá trị nhận được (mã GT + câu); thách thức (mã TT + nội dung); cách vượt qua; từ khóa hành trình (mã TK); câu nhắn gửi (không bắt buộc).*
 
-## B. Đã có ảnh, chưa có thông tin – 1 học viên
+## B. Đã có thông tin, chưa có ảnh – 2 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
-| HV010 | Trần Hữu Kiên | 1 | Petrovietnam | Toàn bộ thông tin (đã có 02 ảnh ngày 23/10) |
+| HV058 | Đặng Sơn Tùng | 2 | VSP | Ảnh chân dung + ảnh hoạt động |
+| HV044 | Nguyễn Thị Lan Ngọc | 2 | PQPOC | Ảnh chân dung + ảnh hoạt động; **cách vượt qua, mã TK, câu nhắn gửi** (mới nộp chức danh, GT1, giá trị, TT5, thách thức) |
 
 ## C. Đã có thông tin, thiếu ảnh – 4 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |

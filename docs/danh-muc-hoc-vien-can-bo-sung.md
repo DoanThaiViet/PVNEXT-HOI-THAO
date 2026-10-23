@@ -1,39 +1,37 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
 *Cập nhật ngày 23/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản sửa 23/10) và thư mục ảnh học viên trên OneDrive.*
 
-**Tình trạng chung:** 46/60 học viên đã đủ thông tin và ảnh; **14 học viên** còn thiếu.
+**Tình trạng chung:** 48/60 học viên đã đủ thông tin và ảnh; **12 học viên** còn thiếu.
 
-## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 4 học viên
+## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 3 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
 | HV017 | Nguyễn Vũ Quang | 1 | PVEP | Toàn bộ thông tin + 02 ảnh |
 | HV032 | Bùi Ngọc Ấn | 2 | PVPMB | Toàn bộ thông tin + 02 ảnh |
 | HV041 | Nguyễn Thế Huy | 2 | VSP | Toàn bộ thông tin + 02 ảnh |
-| HV060 | Lê Minh Vương | 2 | PVCollege | Toàn bộ thông tin + 02 ảnh |
 
 *"Toàn bộ thông tin" gồm: chức danh; giá trị nhận được (mã GT + câu); thách thức (mã TT + nội dung); cách vượt qua; từ khóa hành trình (mã TK); câu nhắn gửi (không bắt buộc).*
 
-## B. Đã có thông tin, chưa có ảnh – 2 học viên
+## B. Đã có ảnh, chưa có thông tin – 1 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
-| HV058 | Đặng Sơn Tùng | 2 | VSP | Ảnh chân dung + ảnh hoạt động |
-| HV044 | Nguyễn Thị Lan Ngọc | 2 | PQPOC | Ảnh chân dung + ảnh hoạt động; **cách vượt qua, mã TK, câu nhắn gửi** (mới nộp chức danh, GT1, giá trị, TT5, thách thức) |
+| HV060 | Lê Minh Vương | 2 | PVCollege | Toàn bộ thông tin (đã có 02 ảnh ngày 23/10) |
 
-## C. Đã có thông tin, thiếu ảnh – 4 học viên
+## C. Đã có thông tin, thiếu ảnh – 2 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
 | HV033 | Nguyễn Đức Anh | 2 | PTSC | Ảnh chân dung + ảnh hoạt động (thư mục OneDrive đang trống) |
-| HV037 | Bùi Văn Điệp | 2 | PVD | Ảnh chân dung + ảnh hoạt động |
 | HV007 | Nguyễn Việt Hưng | 1 | PTSC | Ảnh hoạt động |
-| HV016 | Vương Minh Quân | 1 | PTSC | Ảnh hoạt động; câu nhắn gửi (không bắt buộc) |
 
-## D. Thiếu một phần nội dung – 4 học viên
+## D. Thiếu một phần nội dung – 6 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
+| HV044 | Nguyễn Thị Lan Ngọc | 2 | PQPOC | Cách vượt qua, mã TK, câu nhắn gửi (đã có ảnh, chức danh, GT1, giá trị, TT5, thách thức) |
 | HV035 | Trần Linh Chi | 2 | PVPGB | Đã chọn mã GT1/TT1/TK3 nhưng **chưa viết**: giá trị nhận được, thách thức, cách vượt qua, câu nhắn gửi |
 | HV006 | Nguyễn Khánh Hiếu | 1 | PVCollege | Chức danh |
 | HV047 | Vũ Lê Quốc | 2 | PVPGB | Mã từ khóa hành trình (chọn 1 trong TK1–TK5) |
 | HV015 | Nguyễn Phương Nam | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
+| HV016 | Vương Minh Quân | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
 
 ## E. Cần học viên xác nhận lại nội dung
 | Mã | Họ tên | Vấn đề | Đề nghị |

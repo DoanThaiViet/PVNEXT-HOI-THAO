@@ -1,7 +1,7 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
 *Cập nhật ngày 25/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản tải lên 25/10) và thư mục ảnh học viên trên OneDrive.*
 
-**Tình trạng chung:** 53/60 học viên đã đủ thông tin và ảnh; **7 học viên** còn thiếu.
+**Tình trạng chung:** 54/60 học viên đã đủ thông tin và ảnh; **6 học viên** còn thiếu.
 
 ## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 1 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
@@ -20,10 +20,9 @@
 |---|---|---|---|---|
 | HV007 | Nguyễn Việt Hưng | 1 | PTSC | Ảnh hoạt động |
 
-## D. Thiếu một phần nội dung – 4 học viên
+## D. Thiếu một phần nội dung – 3 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
 |---|---|---|---|---|
-| HV035 | Trần Linh Chi | 2 | PVPGB | Đã chọn mã GT1/TT1/TK3 nhưng **chưa viết**: giá trị nhận được, thách thức, cách vượt qua, câu nhắn gửi |
 | HV006 | Nguyễn Khánh Hiếu | 1 | PVCollege | Chức danh |
 | HV015 | Nguyễn Phương Nam | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
 | HV016 | Vương Minh Quân | 1 | PTSC | Câu nhắn gửi (không bắt buộc) |
@@ -35,7 +34,7 @@
 | HV042 / HV043 | Nguyễn Thị Liên / Nguyễn Tuấn Minh | "Câu nhắn gửi" trùng nguyên văn | Một trong hai bạn viết lại |
 | HV027 | Trịnh Hữu Tùng | "Cách vượt qua" đang ghi "…không nhận các công việc… không quen thuộc…" – ngược ý | Xác nhận lại (dự kiến "không ngại nhận") |
 
-*Đã bổ sung ngày 25/10: HV041 Nguyễn Thế Huy (VSP) – đủ thông tin theo Excel + 02 ảnh.*
+*Đã bổ sung ngày 25/10: HV041 Nguyễn Thế Huy (VSP) – đủ thông tin theo Excel + 02 ảnh; HV035 Trần Linh Chi (PVPGB) – đủ nội dung.*
 
 ## Bảng mã tham chiếu
 - **GT – Giá trị nhận được:** GT1 Tư duy và nhận thức · GT2 Năng lực chuyên môn · GT3 Kỹ năng quản lý, lãnh đạo · GT4 Phương pháp làm việc · GT5 Mạng lưới và khả năng kết nối · GT6 Định hướng phát triển nghề nghiệp

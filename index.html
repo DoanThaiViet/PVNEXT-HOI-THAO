@@ -1398,15 +1398,15 @@ const CITY={HN:{n:'Hà Nội',ll:[105.85,21.03],side:1},QN:{n:'Quảng Ngãi',ll
 // Đơn vị trong Excel → [tên hiển thị, trụ cột, nơi đặt trụ sở]
 const UNIT={'PVEP':['PVEP','NL','HN'],'VSP':['VSP','NL','VT'],'PVGAS':['PV GAS','NL','HCM'],'PV GAS':['PV GAS','NL','HCM'],
  'PVPGB':['PVPGB','NL','HG'],'PVPower':['PV Power','NL','HN'],'PVPMB':['PVPMB','NL','HN'],'BĐPOC':['BĐPOC','NL','HCM'],'PQPOC':['PQPOC','NL','HCM'],
- 'Ban ĐHDA Lô 01/97&02/97':['PVEP – CN TP.HCM','NL','HCM'],'Ban ĐHDA Lô 01&02':['PVEP – CN TP.HCM','NL','HCM'],
+ 'Ban ĐHDA Lô 01/97&02/97':['PVEP','NL','HN'],'Ban ĐHDA Lô 01&02':['Ban ĐHDA Lô 01&02','NL','VT'],
  'BSR':['BSR','CN','QN'],'PVCFC':['PVCFC','CN','CM'],'PVFCCo':['PVFCCo','CN','HCM'],'PVOIL':['PVOIL','CN','HCM'],
  'PTSC':['PTSC','DV','HCM'],'PTSC M&C':['PTSC M&C','DV','VT'],'PVD':['PVD','DV','HCM'],'PVTrans':['PVTrans','DV','HCM'],'PVCollege':['PVCollege','DV','VT'],
  'Petrovietnam':['Công ty mẹ','NL','HN']};
 // Học viên làm việc khác nơi đặt mặc định của đơn vị
-const PLACE={HV035:'HN'};
+const PLACE={HV035:'HN',HV008:'HCM'};
 const cityOf=p=>PLACE[p.id]||(UNIT[p.unit]||[0,0,'HN'])[2];
 // Thứ tự đơn vị (và học viên) trong từng trụ cột
-const ORDER=['Công ty mẹ','PVEP','PVEP – CN TP.HCM','VSP','PV GAS','PV Power','PVPGB','PVPMB','BĐPOC','PQPOC','BSR','PVFCCo','PVCFC','PVOIL','PTSC','PTSC M&C','PVD','PVTrans','PVCollege'];
+const ORDER=['Công ty mẹ','PVEP','VSP','PV GAS','PV Power','PVPGB','PVPMB','BĐPOC','PQPOC','Ban ĐHDA Lô 01&02','BSR','PVFCCo','PVCFC','PVOIL','PTSC','PTSC M&C','PVD','PVTrans','PVCollege'];
 const ISL={hs:[[111.6,16.5],[112.3,16.8],[111.9,16.2],[112.7,16.1],[111.2,15.8],[112.1,15.9]],ts:[[114.3,10.4],[113.9,8.6],[114.9,11],[112.9,8.9],[115.5,9.9],[114.4,9.2],[113.4,9.7]]};
 const proj=([lon,lat])=>[(lon-MAP.lon0)*MAP.k*MAP.s,(MAP.lat1-lat)*MAP.s];
 const svgEl=document.getElementById('triMap'),grid=document.getElementById('triGrid'),hub=document.getElementById('triHub'),flow=document.getElementById('triFlow'),body=sc.querySelector('.triBody');

@@ -634,7 +634,7 @@ body.mosaicOn .top{justify-content:center}body.mosaicOn .brandMeta,body.mosaicOn
 .triBody{position:relative;z-index:1}
 .triScene[data-focus] .triCol:not(.focus){filter:saturate(.35) brightness(.6)}
 .triScene[data-focus] .triFlow path:not(.focus){opacity:.08}
-@media(max-width:980px){.triBody{grid-template-columns:1fr}.triMap{height:56vh}.triCol{grid-template-columns:1fr}.triFlow{display:none}.triKpi div{text-align:left}.triCol{overflow:visible}}
+@media(max-width:980px){.triScene{display:block}.triHead{margin-bottom:14px}.triBody{display:block}.triMap{height:min(56vh,520px);margin-bottom:28px}.triCols,.triGrid{display:flex;flex-direction:column;gap:12px}.triCol{flex:none;min-height:auto;grid-template-columns:1fr;gap:10px}.triFlow{display:none}.triKpi div{text-align:left}}
 .tmShine{fill:none;stroke:#eafff4;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:46 954;filter:drop-shadow(0 0 4px #7ff0b8);animation:triShine 9s linear infinite}
 .tmShine.b{animation-delay:-4.5s;stroke:#9fe7ff}
 @keyframes triShine{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}

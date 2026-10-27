@@ -1,19 +1,7 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
-*Cập nhật ngày 25/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản tải lên 25/10) và thư mục ảnh học viên trên OneDrive.*
+*Cập nhật ngày 27/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản tải lên 25/10) và thư mục ảnh học viên trên OneDrive.*
 
-**Tình trạng chung:** 54/60 học viên đã đủ thông tin và ảnh; **6 học viên** còn thiếu.
-
-## A. Chưa nộp gì (cả thông tin và 02 ảnh) – 1 học viên
-| Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
-|---|---|---|---|---|
-| HV032 | Bùi Ngọc Ấn | 2 | PVPMB | Toàn bộ thông tin + 02 ảnh |
-
-*"Toàn bộ thông tin" gồm: chức danh; giá trị nhận được (mã GT + câu); thách thức (mã TT + nội dung); cách vượt qua; từ khóa hành trình (mã TK); câu nhắn gửi (không bắt buộc).*
-
-## B. Đã có ảnh, chưa có thông tin – 1 học viên
-| Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
-|---|---|---|---|---|
-| HV060 | Lê Minh Vương | 2 | PVCollege | Toàn bộ thông tin (đã có ảnh chân dung + ảnh hoạt động) |
+**Tình trạng chung:** 54/58 học viên trình chiếu đã đủ thông tin và ảnh; **4 học viên** còn thiếu (HV007, HV006, HV015, HV016).
 
 ## C. Đã có thông tin, thiếu ảnh – 1 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
@@ -35,6 +23,8 @@
 | HV027 | Trịnh Hữu Tùng | "Cách vượt qua" đang ghi "…không nhận các công việc… không quen thuộc…" – ngược ý | Xác nhận lại (dự kiến "không ngại nhận") |
 
 *Đã bổ sung ngày 25/10: HV041 Nguyễn Thế Huy (VSP) – đủ thông tin theo Excel + 02 ảnh; HV035 Trần Linh Chi (PVPGB) – đủ nội dung.*
+
+*Ngày 27/10: rút HV032 Bùi Ngọc Ấn (PVPMB) và HV060 Lê Minh Vương (PVCollege) khỏi danh sách trình chiếu; trang vẫn ghi 60 học viên.*
 
 ## Bảng mã tham chiếu
 - **GT – Giá trị nhận được:** GT1 Tư duy và nhận thức · GT2 Năng lực chuyên môn · GT3 Kỹ năng quản lý, lãnh đạo · GT4 Phương pháp làm việc · GT5 Mạng lưới và khả năng kết nối · GT6 Định hướng phát triển nghề nghiệp

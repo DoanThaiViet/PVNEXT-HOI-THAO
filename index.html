@@ -604,7 +604,7 @@ body.mosaicOn .top{justify-content:center}body.mosaicOn .brandMeta,body.mosaicOn
 @keyframes triPulse{0%{opacity:.4;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
 .triCols{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);min-height:0}
 .triHub{display:flex;align-items:center;gap:14px;padding:clamp(8px,1.1vh,14px) 18px;border-radius:16px;background:linear-gradient(90deg,rgba(63,217,138,.12),rgba(242,184,75,.10),rgba(111,168,255,.12));border:1px solid rgba(255,255,255,.14);opacity:0;transform:translateY(-10px);transition:opacity .6s,transform .7s}
-.triScene.s3 .triHub{opacity:1;transform:none}
+.triScene.s3 .triHub{opacity:1;transform:none}.triHub[hidden]{display:none}
 .triHub b{font:800 clamp(13px,1vw,19px)/1.2 var(--display);color:#fff}
 .triHub small{display:block;font-size:clamp(10px,.72vw,14px);color:#AAB8C8;margin-top:2px}
 .triHub .triFaces{margin-left:auto}.triHub .triFaces .tf{opacity:1;transform:none}
@@ -1401,7 +1401,9 @@ const UNIT={'PVEP':['PVEP','NL','HN'],'VSP':['VSP','NL','VT'],'PVGAS':['PV GAS',
  'Ban ĐHDA Lô 01/97&02/97':['Ban ĐHDA Lô 01&02','NL','VT'],'Ban ĐHDA Lô 01&02':['Ban ĐHDA Lô 01&02','NL','VT'],
  'BSR':['BSR','CN','QN'],'PVCFC':['PVCFC','CN','CM'],'PVFCCo':['PVFCCo','CN','HCM'],'PVOIL':['PVOIL','CN','HCM'],
  'PTSC':['PTSC','DV','HCM'],'PTSC M&C':['PTSC M&C','DV','VT'],'PVD':['PVD','DV','HCM'],'PVTrans':['PVTrans','DV','HCM'],'PVCollege':['PVCollege','DV','VT'],
- 'Petrovietnam':['Công ty mẹ Petrovietnam','HQ','HN']};
+ 'Petrovietnam':['Công ty mẹ','NL','HN']};
+// Thứ tự đơn vị (và học viên) trong từng trụ cột
+const ORDER=['Công ty mẹ','PVEP','VSP','PV GAS','PV Power','PVPGB','PVPMB','BĐPOC','PQPOC','Ban ĐHDA Lô 01&02','BSR','PVFCCo','PVCFC','PVOIL','PTSC','PTSC M&C','PVD','PVTrans','PVCollege'];
 const ISL={hs:[[111.6,16.5],[112.3,16.8],[111.9,16.2],[112.7,16.1],[111.2,15.8],[112.1,15.9]],ts:[[114.3,10.4],[113.9,8.6],[114.9,11],[112.9,8.9],[115.5,9.9],[114.4,9.2],[113.4,9.7]]};
 const proj=([lon,lat])=>[(lon-MAP.lon0)*MAP.k*MAP.s,(MAP.lat1-lat)*MAP.s];
 const svgEl=document.getElementById('triMap'),grid=document.getElementById('triGrid'),hub=document.getElementById('triHub'),flow=document.getElementById('triFlow'),body=sc.querySelector('.triBody');
@@ -1410,7 +1412,8 @@ function face(p){const img=assetImages[p.portrait];return `<span class="tf" data
 function group(){
  const units=new Map();
  people.forEach(p=>{const u=UNIT[p.unit]||[p.unit||'Khác','HQ','HN'];if(!units.has(u[0]))units.set(u[0],{name:u[0],p:u[1],city:u[2],people:[]});units.get(u[0]).people.push(p)});
- return [...units.values()].sort((a,b)=>b.people.length-a.people.length);
+ const rank=u=>{const i=ORDER.indexOf(u.name);return i<0?ORDER.length:i};
+ return [...units.values()].sort((a,b)=>rank(a)-rank(b));
 }
 function drawMap(units){
  const cities={};units.forEach(u=>{(cities[u.city]=cities[u.city]||{units:[],n:0}).units.push(u);cities[u.city].n+=u.people.length});
@@ -1431,7 +1434,7 @@ function drawMap(units){
 }
 function drawCols(units){
  const total=people.length||1,hq=units.filter(u=>u.p==='HQ');
- hub.innerHTML=hq.length?`<div><b>${hq.map(u=>escapeHtml(u.name)).join(' · ')}</b><small>Định hướng, điều phối ba trụ cột chiến lược</small></div><div class="triFaces">${hq.flatMap(u=>u.people).map(face).join('')}</div>`:'';
+ hub.innerHTML=hq.length?`<div><b>${hq.map(u=>escapeHtml(u.name)).join(' · ')}</b><small>Chưa xếp vào trụ cột</small></div><div class="triFaces">${hq.flatMap(u=>u.people).map(face).join('')}</div>`:'';
  hub.hidden=!hq.length;
  grid.innerHTML=PIL.map(pl=>{const us=units.filter(u=>u.p===pl.k),ps=us.flatMap(u=>u.people);
   return `<div class="triCol" data-p="${pl.k}" style="--c:${pl.c};--ca:${pl.ca}"><div class="triLeft"><div class="triTop"><div class="triNum" data-to="${ps.length}">0</div><div class="triPct">${Math.round(ps.length/total*100)}%<br>học viên</div></div>

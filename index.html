@@ -624,7 +624,7 @@ body.mosaicOn .top{justify-content:center}body.mosaicOn .brandMeta,body.mosaicOn
 .triUnit em{font-style:normal;color:var(--c);font-weight:800}
 .triUnit.on{opacity:1;box-shadow:0 0 14px rgba(var(--ca),.28)}
 .triFaces{display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px;min-height:0}
-.tf{width:clamp(26px,min(2.3vw,4.4vh),48px);aspect-ratio:1;border-radius:50%;overflow:hidden;display:grid;place-items:center;flex:none;background:radial-gradient(circle at 35% 30%,rgba(104,215,204,.35),rgba(14,40,70,.9));border:1.5px solid rgba(var(--ca,104,215,204),.7);color:#fff;font:700 9px/1 var(--display);cursor:pointer;opacity:0;transform:scale(.3);transition:opacity .35s,transform .45s cubic-bezier(.2,1.5,.4,1)}
+.tf{width:var(--tf,clamp(26px,min(2.3vw,4.4vh),48px));aspect-ratio:1;border-radius:50%;overflow:hidden;display:grid;place-items:center;flex:none;background:radial-gradient(circle at 35% 30%,rgba(104,215,204,.35),rgba(14,40,70,.9));border:1.5px solid rgba(var(--ca,104,215,204),.7);color:#fff;font:700 9px/1 var(--display);cursor:pointer;opacity:0;transform:scale(.3);transition:opacity .35s,transform .45s cubic-bezier(.2,1.5,.4,1)}
 .tf img{width:100%;height:100%;object-fit:cover}
 .tf.on{opacity:1;transform:none}
 .tf:hover{transform:scale(1.25);z-index:2;box-shadow:0 0 14px rgba(var(--ca,104,215,204),.8)}
@@ -1458,10 +1458,14 @@ function drawFlow(){
    h+=`<path pathLength="1" data-p="${pk}" data-i="${k++}" stroke="${c}" stroke-width="${Math.min(7,1.2+src[city]*.32).toFixed(1)}" d="M${x1.toFixed(1)} ${y1.toFixed(1)} C${(x1+dx).toFixed(1)} ${y1.toFixed(1)},${(x2-dx).toFixed(1)} ${y2.toFixed(1)},${x2.toFixed(1)} ${y2.toFixed(1)}"/>`})});
  flow.innerHTML=h;
 }
+// Co ảnh học viên cho vừa chiều cao từng hàng trụ cột (màn thấp không bị cắt)
+function fit(){sc.style.removeProperty('--tf');if(innerWidth<=980)return;
+ const over=()=>[...grid.querySelectorAll('.triCol')].some(c=>c.scrollHeight>c.clientHeight+1);
+ let s=parseFloat(getComputedStyle(sc.querySelector('.tf')||sc).width)||40;while(over()&&s>16){s-=2;sc.style.setProperty('--tf',s+'px')}}
 function count(el){const to=+el.dataset.to,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/900);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1&&scenes[currentScene]===sc)requestAnimationFrame(f)})(t0)}
 function clear(){timers.forEach(clearTimeout);timers=[];sc.classList.remove('s1','s3');sc.removeAttribute('data-focus')}
 function run(){
- clear();const units=group();drawMap(units);drawCols(units);flow.innerHTML='';
+ clear();const units=group();drawMap(units);drawCols(units);fit();flow.innerHTML='';
  const calm=document.body.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches,T=calm?0:1,at=(ms,fn)=>timers.push(setTimeout(fn,ms*T));
  at(80,()=>sc.classList.add('s1'));
  svgEl.querySelectorAll('.tmCity').forEach(g=>at(600+g.dataset.i*260,()=>g.classList.add('on')));
@@ -1475,7 +1479,7 @@ sc.addEventListener('mouseover',e=>{const col=e.target.closest('.triCol');if(!co
 sc.addEventListener('mouseleave',()=>sc.removeAttribute('data-focus'));
 // Bấm vào gương mặt → mở profile học viên đó
 sc.addEventListener('click',e=>{const f=e.target.closest('.tf');if(!f)return;const p=people.find(x=>x.id===f.dataset.id);if(!p)return;if(autoPlay)toggleAuto();profileIndex=people.indexOf(p);activate(scenes.findIndex(s=>s.dataset.label==='PROFILE'))});
-let rz;addEventListener('resize',()=>{if(scenes[currentScene]!==sc)return;clearTimeout(rz);rz=setTimeout(()=>{if(sc.classList.contains('s3')){drawFlow();flow.querySelectorAll('path').forEach(p=>p.classList.add('on'))}},150)});
+let rz;addEventListener('resize',()=>{if(scenes[currentScene]!==sc)return;clearTimeout(rz);rz=setTimeout(()=>{fit();if(sc.classList.contains('s3')){drawFlow();flow.querySelectorAll('path').forEach(p=>p.classList.add('on'))}},150)});
 const a=activate;activate=function(i){a(i);if(scenes[i]===sc)requestAnimationFrame(run);else clear()};
 })();
 </script>

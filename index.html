@@ -728,7 +728,7 @@ body.calm .tmCity .halo{display:none}
     </div>
     <div class="triBody">
       <svg class="triFlow" id="triFlow" aria-hidden="true"></svg>
-      <div class="triMap"><svg id="triMap" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Bản đồ vị trí các đơn vị có học viên"></svg><div class="note">Vị trí theo trụ sở chính đơn vị · Số trong vòng tròn: số học viên</div></div>
+      <div class="triMap"><svg id="triMap" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Bản đồ vị trí các đơn vị có học viên"></svg><div class="note">Vị trí theo nơi công tác · Số trong vòng tròn: số học viên</div></div>
       <div class="triCols"><div class="triHub" id="triHub"></div><div class="triGrid" id="triGrid"></div></div>
     </div>
   </section>
@@ -1402,6 +1402,9 @@ const UNIT={'PVEP':['PVEP','NL','HN'],'VSP':['VSP','NL','VT'],'PVGAS':['PV GAS',
  'BSR':['BSR','CN','QN'],'PVCFC':['PVCFC','CN','CM'],'PVFCCo':['PVFCCo','CN','HCM'],'PVOIL':['PVOIL','CN','HCM'],
  'PTSC':['PTSC','DV','HCM'],'PTSC M&C':['PTSC M&C','DV','VT'],'PVD':['PVD','DV','HCM'],'PVTrans':['PVTrans','DV','HCM'],'PVCollege':['PVCollege','DV','VT'],
  'Petrovietnam':['Công ty mẹ','NL','HN']};
+// Học viên làm việc khác nơi đặt mặc định của đơn vị
+const PLACE={HV035:'HN'};
+const cityOf=p=>PLACE[p.id]||(UNIT[p.unit]||[0,0,'HN'])[2];
 // Thứ tự đơn vị (và học viên) trong từng trụ cột
 const ORDER=['Công ty mẹ','PVEP','PVEP – CN TP.HCM','VSP','PV GAS','PV Power','PVPGB','PVPMB','BĐPOC','PQPOC','BSR','PVFCCo','PVCFC','PVOIL','PTSC','PTSC M&C','PVD','PVTrans','PVCollege'];
 const ISL={hs:[[111.6,16.5],[112.3,16.8],[111.9,16.2],[112.7,16.1],[111.2,15.8],[112.1,15.9]],ts:[[114.3,10.4],[113.9,8.6],[114.9,11],[112.9,8.9],[115.5,9.9],[114.4,9.2],[113.4,9.7]]};
@@ -1416,7 +1419,7 @@ function group(){
  return [...units.values()].sort((a,b)=>rank(a)-rank(b));
 }
 function drawMap(units){
- const cities={};units.forEach(u=>{(cities[u.city]=cities[u.city]||{units:[],n:0}).units.push(u);cities[u.city].n+=u.people.length});
+ const cities={};units.forEach(u=>u.people.forEach(p=>{const c=cities[cityOf(p)]=cities[cityOf(p)]||{units:new Set(),n:0,by:{}};c.units.add(u.name);c.n++;c.by[u.p]=(c.by[u.p]||0)+1}));
  const P=MAP.paths;let h=`<path class="tmGlow" d="${P.VNM}"/>`;
  Object.keys(P).filter(k=>k!=='VNM').forEach(k=>h+=`<path class="tmLand" d="${P[k]}"/>`);
  h+=`<path class="tmVN" d="${P.VNM}"/>`;
@@ -1425,10 +1428,10 @@ function drawMap(units){
  // điểm đơn vị, Bắc → Nam
  Object.keys(CITY).filter(c=>cities[c]).sort((a,b)=>CITY[b].ll[1]-CITY[a].ll[1]).forEach((c,i)=>{
   const C=CITY[c],d=cities[c],[tx,ty]=proj(C.ll),x=tx+(C.dx||0),y=ty+(C.dy||0),r=7+Math.sqrt(d.n)*2.3,circ=2*Math.PI*(r+3);
-  let off=0,segs='';PIL.concat([{k:'HQ',c:'#D9C7A3'}]).forEach(pl=>{const n=d.units.filter(u=>u.p===pl.k).reduce((s,u)=>s+u.people.length,0);if(!n)return;const L=circ*n/d.n;segs+=`<circle class="seg" r="${(r+3).toFixed(1)}" stroke="${pl.c}" stroke-dasharray="${L.toFixed(1)} ${circ.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90)"/>`;off+=L});
+  let off=0,segs='';PIL.concat([{k:'HQ',c:'#D9C7A3'}]).forEach(pl=>{const n=d.by[pl.k]||0;if(!n)return;const L=circ*n/d.n;segs+=`<circle class="seg" r="${(r+3).toFixed(1)}" stroke="${pl.c}" stroke-dasharray="${L.toFixed(1)} ${circ.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90)"/>`;off+=L});
   const lead=(C.dx||C.dy)?`<line class="tmLead" x1="${tx}" y1="${ty}" x2="${x}" y2="${y}"/><circle class="tmTrue" cx="${tx}" cy="${ty}" r="1.6"/>`:'';
   const lx=C.side*(r+9),anchor=C.side>0?'start':'end';
-  h+=`${lead}<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="tmCity" data-city="${c}" data-i="${i}"><circle class="halo" r="${r}"/>${segs}<circle class="core" r="${r}"/><text class="n">${d.n}</text><text class="cl" x="${lx}" y="-3" text-anchor="${anchor}">${escapeHtml(C.n)}</text><text class="cs" x="${lx}" y="11" text-anchor="${anchor}">${d.units.length} đơn vị · ${d.n} học viên</text></g></g>`;
+  h+=`${lead}<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="tmCity" data-city="${c}" data-i="${i}"><circle class="halo" r="${r}"/>${segs}<circle class="core" r="${r}"/><text class="n">${d.n}</text><text class="cl" x="${lx}" y="-3" text-anchor="${anchor}">${escapeHtml(C.n)}</text><text class="cs" x="${lx}" y="11" text-anchor="${anchor}">${d.units.size} đơn vị · ${d.n} học viên</text></g></g>`;
  });
  svgEl.setAttribute('viewBox',`0 0 ${MAP.w} ${MAP.h}`);svgEl.innerHTML=h;
 }
@@ -1448,7 +1451,7 @@ function drawFlow(){
  const br=body.getBoundingClientRect();flow.setAttribute('width',br.width);flow.setAttribute('height',br.height);flow.style.width=br.width+'px';flow.style.height=br.height+'px';
  const cards=[...(hub.hidden?[]:[hub]),...grid.querySelectorAll('.triCol')];let h='',k=0;
  cards.forEach(card=>{const pk=card.dataset.p||'HQ',c=card.dataset.p?getComputedStyle(card).getPropertyValue('--c').trim():'#D9C7A3';
-  const src={};people.forEach(p=>{const u=UNIT[p.unit]||[0,'HQ','HN'];if(u[1]===pk)src[u[2]]=(src[u[2]]||0)+1});
+  const src={};people.forEach(p=>{const u=UNIT[p.unit]||[0,'HQ'];if(u[1]===pk)src[cityOf(p)]=(src[cityOf(p)]||0)+1});
   const list=Object.keys(src).sort((a,b)=>CITY[b].ll[1]-CITY[a].ll[1]),b=card.getBoundingClientRect();
   list.forEach((city,m)=>{const node=svgEl.querySelector(`.tmCity[data-city="${city}"] .core`);if(!node)return;const a=node.getBoundingClientRect();
    const x1=a.right-br.left,y1=a.top+a.height/2-br.top,x2=b.left-br.left,y2=b.top+b.height*(m+1)/(list.length+1)-br.top,dx=Math.max(50,(x2-x1)*.5);

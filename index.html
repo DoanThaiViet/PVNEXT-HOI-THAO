@@ -750,7 +750,7 @@ body.calm .tmCity .halo{display:none}body.calm .tmShine,body.calm .tmTw{display:
     <div class="classBlock spotBlock">
       <small class="reveal r1">PETROVIETNAM NEXT 2025 · NEXT GENERATION</small>
       <div class="spotPhoto" id="spotPhoto"></div>
-      <div class="spotIdx reveal r3" id="spotIdx">01 / 60</div>
+      <div class="spotIdx reveal r3" id="spotIdx">01</div>
       <div class="spotName reveal r3" id="spotName"></div>
       <div class="spotUnit reveal r4" id="spotUnit"></div>
     </div>
@@ -767,7 +767,7 @@ body.calm .tmCity .halo{display:none}body.calm .tmShine,body.calm .tmTw{display:
       <div class="diag"></div>
     </div>
     <div class="profileCopy">
-      <div class="index reveal r1" id="pIndex">01 / 60 · LỚP 1</div>
+      <div class="index reveal r1" id="pIndex">01</div>
       <div class="name reveal r2" id="pName">BÙI LAN ANH</div>
       <div class="unit reveal r2" id="pUnit">PVTrans</div>
       <div class="keywordBlock reveal r3">
@@ -819,6 +819,8 @@ const people = JSON.parse(document.getElementById("studentData").textContent);
 const UNIT_ORDER=['Petrovietnam','PVEP','Ban ĐHDA Lô 01/97&02/97','VSP','PVGAS','PV GAS','PVPower','PVPGB','PVPMB','BĐPOC','PQPOC','Ban ĐHDA Lô 01&02','BSR','PVFCCo','PVCFC','PVOIL','PTSC','PTSC M&C','PVD','PVTrans','PVCollege'];
 // Học viên đã rút khỏi danh sách trình chiếu; trang vẫn ghi 60 học viên
 const REMOVED=new Set(['HV032','HV060']),SHOW_TOTAL=60;
+// Cộng lại 2 học viên đã rút (đều thuộc Lớp 2) vào các con số hiển thị để khớp 60 / 30 / 30
+const shownN=(n,list)=>n+(list.some(p=>p.class===2)?REMOVED.size:0);
 const PIN_ORDER=['HV010','HV055','HV028','HV017','HV057'];
 function sortPeople(){const r=(l,v)=>{const i=l.indexOf(v);return i<0?l.length:i};
  people.sort((x,y)=>r(UNIT_ORDER,x.unit)-r(UNIT_ORDER,y.unit)||r(PIN_ORDER,x.id)-r(PIN_ORDER,y.id)||x.id.localeCompare(y.id))}
@@ -858,7 +860,7 @@ function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;',
 function valueOrMissing(v){return v?.trim()||'Chưa cung cấp'}
 function renderProfile(){
  const p=people[profileIndex];
- document.getElementById('pIndex').textContent=`${String(profileIndex+1).padStart(2,'0')} / ${SHOW_TOTAL}`;
+ document.getElementById('pIndex').textContent=`${String(profileIndex+1).padStart(2,'0')}`;
  document.getElementById('pName').textContent=p.name.normalize('NFC').toLocaleUpperCase('vi');
  document.getElementById('pUnit').textContent=[p.role,p.unit].filter(Boolean).join(' · ');
  document.getElementById('photoMain').dataset.initials=initials(p.name);
@@ -904,7 +906,7 @@ function setImportStatus(message){document.getElementById('importStatus').textCo
 document.getElementById('excelInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const incoming=parseRows(await readXlsx(file));people.splice(0,people.length,...incoming);sortPeople();if(autoPlay)toggleAuto();profileIndex=0;fillRoster('roster1',0);renderProfile();renderSummary();setImportStatus('Đã nhập 60 học viên. Bấm LƯU BẢN để giữ dữ liệu.')}catch(error){setImportStatus('Chưa nhập: '+error.message)}e.target.value=''};
 document.getElementById('photoInput').onchange=async e=>{try{let count=0;for(const file of e.target.files){if(!/\.(jpg|jpeg|png|webp)$/i.test(file.name))continue;if(file.size>8*1024*1024)throw Error(file.name+' vượt 8 MB; hãy giảm kích thước ảnh.');if(!people.some(p=>p.portrait===file.name||p.activity===file.name))continue;assetImages[file.name]=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)});count++}renderProfile();setImportStatus('Đã ghép '+count+' ảnh theo tên file trong Excel. Bấm LƯU BẢN để giữ dữ liệu.')}catch(error){setImportStatus(error.message)}e.target.value=''};
 document.getElementById('saveData').onclick=()=>{document.getElementById('studentData').textContent=JSON.stringify(people).replaceAll('<','\\u003c');document.getElementById('imageData').textContent=JSON.stringify(assetImages).replaceAll('<','\\u003c');const copy=document.documentElement.cloneNode(true);copy.querySelector('#dataPanel').hidden=true;copy.querySelector('#importStatus').textContent='';const blob=new Blob(['<!doctype html>\n'+copy.outerHTML],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Petrovietnam_NEXT_da_nhap_du_lieu.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);setImportStatus('Đã tải bản HTML chứa dữ liệu và ảnh.')};
-document.getElementById('summaryClass').onchange=renderSummary;
+document.getElementById('summaryClass').onchange=()=>renderSummary();
 document.getElementById('showSummary').onclick=()=>{if(autoPlay)toggleAuto();activate(scenes.findIndex(s=>s.dataset.label==='TỔNG HỢP'))};
 document.getElementById('dataToggle').onclick=()=>{if(autoPlay)toggleAuto();document.getElementById('dataPanel').hidden=!document.getElementById('dataPanel').hidden};
 document.getElementById('closeData').onclick=()=>document.getElementById('dataPanel').hidden=true;
@@ -1265,7 +1267,7 @@ function rankHtml(title,group,field,list){
   const valid=list.filter(p=>Object.hasOwn(CODES[group],p[field]));
   const rows=Object.entries(CODES[group]).map(([code,label])=>({code,label,n:valid.filter(p=>p[field]===code).length})).sort((a,b)=>b.n-a.n);
   const max=Math.max(1,...rows.map(r=>r.n));
-  return `<div class="panel"><h3>${title}</h3><div class="sub">${valid.length} ĐÃ CHỌN · ${list.length-valid.length} CHƯA CHỌN</div><div class="rank">${rows.map((r,i)=>`<div class="rankRow${i===0&&r.n?' lead':''}${r.n?'':' zero'}" style="--d:${i}"><span><em>${r.code}</em>${escapeHtml(r.label)}</span><b>${r.n}</b><div class="track"><i style="--w:${r.n/max*100}"></i></div></div>`).join('')}</div></div>`;
+  return `<div class="panel"><h3>${title}</h3><div class="sub">${shownN(valid.length,list)} ĐÃ CHỌN · ${list.length-valid.length} CHƯA CHỌN</div><div class="rank">${rows.map((r,i)=>`<div class="rankRow${i===0&&r.n?' lead':''}${r.n?'':' zero'}" style="--d:${i}"><span><em>${r.code}</em>${escapeHtml(r.label)}</span><b>${r.n}</b><div class="track"><i style="--w:${r.n/max*100}"></i></div></div>`).join('')}</div></div>`;
 }
 renderSummary=function(){
   const cls=Number(document.getElementById('summaryClass').value),list=people.filter(p=>!cls||p.class===cls);
@@ -1276,11 +1278,11 @@ renderSummary=function(){
   const pct=list.length?Math.round(complete/list.length*100):0;
   const root=document.getElementById('summaryCharts');root.style.display='contents';
   root.innerHTML=`<div class="sumKpis">
-   <div class="kpi"><small>Học viên</small><b>${cls?list.length:SHOW_TOTAL}</b></div>
+   <div class="kpi"><small>Học viên</small><b>${shownN(list.length,list)}</b></div>
    <div class="kpi hot"><small>Từ khóa dẫn đầu</small><b>${top.people.length?TKC[top.c]:'—'}</b></div>
   </div>
   <div class="sumBody">
-   <div class="panel pillarPanel"><h3>Từ khóa hành trình</h3><div class="sub">${tk.reduce((a,t)=>a+t.people.length,0)} ĐÃ CHỌN · ${list.length-tk.reduce((a,t)=>a+t.people.length,0)} CHƯA CHỌN</div>
+   <div class="panel pillarPanel"><h3>Từ khóa hành trình</h3><div class="sub">${shownN(tk.reduce((a,t)=>a+t.people.length,0),list)} ĐÃ CHỌN · ${list.length-tk.reduce((a,t)=>a+t.people.length,0)} CHƯA CHỌN</div>
     <div class="pillars">${tk.map((t,i)=>`<div class="pillar${t===top&&t.people.length?' pLead':''}"><div class="cnt">${t.people.length}</div><div class="col"><div class="bar" style="--h:${Math.max(4,t.people.length/maxTk*100)};--d:${i}"><div class="faces">${t.people.slice(0,12).map(p=>assetImages[p.portrait]?`<span title="${escapeHtml(p.name)}"><img src="${escapeHtml(assetImages[p.portrait])}" alt=""></span>`:`<span title="${escapeHtml(p.name)}">${escapeHtml(initials(p.name))}</span>`).join('')}</div></div></div><label>${TKC[t.c]}</label><small>${t.c}</small></div>`).join('')}</div></div>
    <div class="rankStack">${rankHtml('Giá trị nhận được','GT','gt',list)}${rankHtml('Thách thức lớn nhất','TT','tt',list)}</div>
   </div>
@@ -1302,7 +1304,7 @@ function show(i){const chips=[...document.querySelectorAll('#roster1 .personChip
  chips.forEach((c,j)=>c.classList.toggle('spot',j===k));const p=people[k];const src=assetImages[p.portrait];
  ph.innerHTML=src?`<img src="${escapeHtml(src)}" alt="Chân dung ${escapeHtml(p.name)}">`:escapeHtml(initials(p.name));
  ph.classList.remove('swap');void ph.offsetWidth;ph.classList.add('swap');
- document.getElementById('spotIdx').textContent=`${String(k+1).padStart(2,'0')} / ${SHOW_TOTAL}`;
+ document.getElementById('spotIdx').textContent=`${String(k+1).padStart(2,'0')}`;
  document.getElementById('spotName').textContent=p.name;
  document.getElementById('spotUnit').textContent=[p.role,p.unit].filter(Boolean).join(' · ')}
 function loop(){clearInterval(t);if(scenes[currentScene]!==sc)return;t=setInterval(()=>{if(scenes[currentScene]!==sc){clearInterval(t);return}show(k+1)},document.body.classList.contains('calm')?4000:1800)}

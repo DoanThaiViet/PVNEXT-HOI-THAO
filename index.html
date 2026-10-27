@@ -1479,5 +1479,15 @@ let rz;addEventListener('resize',()=>{if(scenes[currentScene]!==sc)return;clearT
 const a=activate;activate=function(i){a(i);if(scenes[i]===sc)requestAnimationFrame(run);else clear()};
 })();
 </script>
+<script id="v13-autofs">
+/* Trình duyệt không cho tự bật toàn màn hình khi mở link: bật ở lần bấm/phím đầu tiên, chỉ một lần */
+(function(){
+const el=document.documentElement;if(!el.requestFullscreen)return;
+function go(e){if(document.fullscreenElement)return done();if(e.target.closest?.('#dataPanel,input,select,textarea,#full')||(e.key&&e.key.toLowerCase()==='f'))return;
+ el.requestFullscreen().then(done,()=>{})}
+function done(){removeEventListener('pointerdown',go,true);removeEventListener('keydown',go,true)}
+addEventListener('pointerdown',go,true);addEventListener('keydown',go,true);
+})();
+</script>
 </body>
 </html>

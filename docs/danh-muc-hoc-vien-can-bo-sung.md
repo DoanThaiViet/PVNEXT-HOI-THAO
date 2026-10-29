@@ -1,12 +1,7 @@
 # DANH MỤC THÔNG TIN HỌC VIÊN CẦN BỔ SUNG – PV-NEXT 2025
-*Cập nhật ngày 27/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản tải lên 25/10) và thư mục ảnh học viên trên OneDrive.*
+*Cập nhật ngày 29/10/2026. Đối chiếu dữ liệu trên trang với file `Slide Hanh trinh truong thanh/20260925 - Thu thap thong tin.xlsx` (bản tải lên 25/10) và thư mục ảnh học viên trên OneDrive.*
 
-**Tình trạng chung:** 54/58 học viên trình chiếu đã đủ thông tin và ảnh; **4 học viên** còn thiếu (HV007, HV006, HV015, HV016).
-
-## C. Đã có thông tin, thiếu ảnh – 1 học viên
-| Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |
-|---|---|---|---|---|
-| HV007 | Nguyễn Việt Hưng | 1 | PTSC | Ảnh hoạt động |
+**Tình trạng chung:** 55/58 học viên trình chiếu đã đủ thông tin và ảnh; **3 học viên** còn thiếu (HV006, HV015, HV016). HV007 dùng tạm ảnh tập thể lớp làm ảnh hoạt động.
 
 ## D. Thiếu một phần nội dung – 3 học viên
 | Mã | Họ tên | Lớp | Đơn vị | Cần bổ sung |

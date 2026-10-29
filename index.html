@@ -1530,5 +1530,16 @@ function done(){removeEventListener('pointerdown',go,true);removeEventListener('
 addEventListener('pointerdown',go,true);addEventListener('keydown',go,true);
 })();
 </script>
+<script id="v14-automusic">
+/* Nhạc nền tự bật: thử phát ngay khi mở; trình duyệt chặn thì bật ở lần bấm/phím đầu tiên (chỉ một lần) */
+(function(){
+let done=false;
+const playing=()=>!bgMusic.paused||soundOn;
+function go(e){if(done)return;if(e&&e.target.closest?.('#sound'))return finish();if(playing())return finish();startSound();finish()}
+function finish(){done=true;removeEventListener('pointerdown',go,true);removeEventListener('keydown',go,true)}
+addEventListener('pointerdown',go,true);addEventListener('keydown',go,true);
+bgMusic.play().then(()=>{fadeMusic(0.6,2500);setSoundBtn(true);finish()},()=>{});
+})();
+</script>
 </body>
 </html>

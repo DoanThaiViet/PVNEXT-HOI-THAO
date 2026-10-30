@@ -1361,10 +1361,13 @@ function card(p,text,d){return `<div class="tCard" style="--d:${d}"><q>${escapeH
 const THANK=/cảm ơn|biết ơn|tri ân/i, MENTOR=/mentor|thầy cô|giảng viên/i;
 const MENTOR_IDS=['HV042','HV030','HV054','HV021','HV059','HV028'];
 // Lời tri ân riêng do học viên gửi Ban tổ chức (thay cho câu trích tự động)
-const CUSTOM_THANKS={HV054:'Em cảm ơn chị Thoa vì sự tận tâm, những chia sẻ quý báu và sự đồng hành không chỉ trong hành trình Petrovietnam-NEXT 2025 mà còn trong công việc và cuộc sống. Chúc chị luôn mạnh khỏe, hạnh phúc và mãi giữ ngọn lửa nhiệt huyết để tiếp tục lan tỏa những giá trị tốt đẹp ❤️',
+const CUSTOM_THANKS={HV023:'Em cảm ơn chị Trà, chị Hương, các anh chị PV College và Nhà máy Đạm Phú Mỹ đã đồng hành, hỗ trợ em trong suốt chặng đường vừa qua.',
+ HV054:'Em cảm ơn chị Thoa vì sự tận tâm, những chia sẻ quý báu và sự đồng hành không chỉ trong hành trình Petrovietnam-NEXT 2025 mà còn trong công việc và cuộc sống. Chúc chị luôn mạnh khỏe, hạnh phúc và mãi giữ ngọn lửa nhiệt huyết để tiếp tục lan tỏa những giá trị tốt đẹp ❤️',
  HV021:'Xin cảm ơn BTC khóa học PV Next 2025, nhất là chị Trà, chị Hương, anh Duy, chị Nhung và ban cán sự lớp; xin tri ân BGĐ KTN, đặc biệt là anh Quang, đã tạo điều kiện và chia sẻ những kinh nghiệm quý báu. Hy vọng chúng em sẽ vận dụng hiệu quả những kiến thức đã học vào các dự án, công việc sắp tới.'};
 function thanksCards(){
-  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,4).map(p=>card(p,p.message,0));
+  // thay thẻ tự trích của một số bạn bằng lời tri ân riêng của bạn khác
+  const SWAP={HV010:'HV023'};
+  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,4).map(p=>{const q=byId(SWAP[p.id])||p;return card(q,CUSTOM_THANKS[q.id]||q.message,0)});
   const ment=MENTOR_IDS.map(byId).filter(Boolean).map(p=>{const t=CUSTOM_THANKS[p.id]||[p.solution,p.value,p.challenge].find(x=>MENTOR.test(x||''));return t&&card(p,t,0)}).filter(Boolean);
   const out=[];hero.forEach((h,i)=>{out.push(h);if(ment[i])out.push(ment[i])});return out.concat(ment.slice(hero.length)).slice(0,8);
 }

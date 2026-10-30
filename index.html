@@ -653,6 +653,14 @@ body.calm .tmCity .halo{display:none}body.calm .tmShine,body.calm .tmTw{display:
 .grain,.grain2{mix-blend-mode:normal!important;animation:none!important}
 .grain{opacity:.05!important}.grain2{opacity:.035!important}
 .allScene[hidden],#gotoClass1[hidden]{display:none!important}
+/* Lời tri ân hiện lần lượt ở giữa màn hình */
+.mSpot{position:absolute;left:50%;top:47%;width:min(820px,calc(100vw - 2*(clamp(240px,22vw,420px) + clamp(16px,3vw,60px)) - 48px));transform:translate(-50%,-50%) scale(.92);opacity:0;transition:opacity .6s,transform .7s cubic-bezier(.2,1,.3,1);pointer-events:none;z-index:6}
+.mSpot.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.mSpot .tCard{opacity:1!important;transform:none!important;animation:none!important;padding:clamp(22px,3vh,40px) clamp(24px,2.4vw,44px)!important;border-radius:26px;background:linear-gradient(145deg,rgba(14,40,70,.94),rgba(10,30,55,.86));border:1px solid rgba(104,215,204,.45)!important;box-shadow:0 0 60px rgba(104,215,204,.3),0 30px 80px rgba(0,0,0,.45)}
+.mSpot .tCard q{font-size:clamp(18px,min(1.75vw,3.4vh),34px)!important;line-height:1.55;font-weight:600;color:#fff}
+.mSpot .tWho{margin-top:18px;font-size:clamp(13px,1vw,18px)}
+.mSpot .tAv{width:clamp(44px,3.4vw,64px)}
+.mosaicStage.dim .mTile{opacity:.28!important;filter:saturate(.6)}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="finder" hidden role="dialog" aria-label="Tìm học viên"><div class="fBox"><input id="fInput" type="search" placeholder="Gõ tên, đơn vị hoặc mã HV… (không cần dấu)" autocomplete="off"><div id="fList"></div></div></div><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
@@ -789,7 +797,7 @@ body.calm .tmCity .halo{display:none}body.calm .tmShine,body.calm .tmTw{display:
 
 <section class="scene summaryScene" data-label="TỔNG HỢP"><div class="summaryHeading"><div><div class="eyebrow">PETROVIETNAM NEXT 2025</div><h2>Tổng hợp hành trình</h2></div><select id="summaryClass" aria-label="Chọn lớp tổng hợp"><option value="0">Cả chương trình</option><option value="1">Lớp 1</option><option value="2">Lớp 2</option></select></div><p id="summaryStatus"></p><div id="summaryCharts"></div><p class="summaryNote">Tỷ lệ từng nhóm = số học viên chọn mã / số học viên đã có mã hợp lệ trong nhóm đó. Mỗi người chọn 1 mã GT, 1 mã TT và 1 mã TK. Nội dung còn thiếu không được suy diễn thành dữ liệu.</p></section>
   <section class="scene mosaicScene" data-label="60 GƯƠNG MẶT">
-    <div class="mosaicStage" id="mosaicStage" aria-label="60 gương mặt học viên"></div><div class="mThanks" id="mThanks"></div>
+    <div class="mosaicStage" id="mosaicStage" aria-label="60 gương mặt học viên"></div><div class="mThanks" id="mThanks"></div><div class="mSpot" id="mSpot" aria-live="polite"></div>
     <div class="mosaicCaption" id="mosaicCaption"><div class="eyebrow">60 GƯƠNG MẶT · 18 THÁNG · 01 HÀNH TRÌNH</div><div class="mosaicQuote">Mãi yêu <span class="grad">PETROVIETNAM-NEXT</span> <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.3 4c2.3 0 3.8 1.3 5.7 3.4C13.9 5.3 15.4 4 17.7 4 21.8 4 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21z"/></svg></div></div>
   </section>
   <section class="scene closing" data-label="CLOSING">
@@ -1361,10 +1369,13 @@ function card(p,text,d){return `<div class="tCard" style="--d:${d}"><q>${escapeH
 const THANK=/cảm ơn|biết ơn|tri ân/i, MENTOR=/mentor|thầy cô|giảng viên/i;
 const MENTOR_IDS=['HV042','HV030','HV054','HV021','HV059','HV028'];
 // Lời tri ân riêng do học viên gửi Ban tổ chức (thay cho câu trích tự động)
-const CUSTOM_THANKS={HV054:'Em cảm ơn chị Thoa vì sự tận tâm, những chia sẻ quý báu và sự đồng hành không chỉ trong hành trình Petrovietnam-NEXT 2025 mà còn trong công việc và cuộc sống. Chúc chị luôn mạnh khỏe, hạnh phúc và mãi giữ ngọn lửa nhiệt huyết để tiếp tục lan tỏa những giá trị tốt đẹp ❤️',
+const CUSTOM_THANKS={HV023:'Em cảm ơn chị Trà, chị Hương, các anh chị PV College và Nhà máy Đạm Phú Mỹ đã đồng hành, hỗ trợ em trong suốt chặng đường vừa qua.',
+ HV054:'Em cảm ơn chị Thoa vì sự tận tâm, những chia sẻ quý báu và sự đồng hành không chỉ trong hành trình Petrovietnam-NEXT 2025 mà còn trong công việc và cuộc sống. Chúc chị luôn mạnh khỏe, hạnh phúc và mãi giữ ngọn lửa nhiệt huyết để tiếp tục lan tỏa những giá trị tốt đẹp ❤️',
  HV021:'Xin cảm ơn BTC khóa học PV Next 2025, nhất là chị Trà, chị Hương, anh Duy, chị Nhung và ban cán sự lớp; xin tri ân BGĐ KTN, đặc biệt là anh Quang, đã tạo điều kiện và chia sẻ những kinh nghiệm quý báu. Hy vọng chúng em sẽ vận dụng hiệu quả những kiến thức đã học vào các dự án, công việc sắp tới.'};
 function thanksCards(){
-  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,4).map(p=>card(p,p.message,0));
+  // thay thẻ tự trích của một số bạn bằng lời tri ân riêng của bạn khác
+  const SWAP={HV010:'HV023'};
+  const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,4).map(p=>{const q=byId(SWAP[p.id])||p;return card(q,CUSTOM_THANKS[q.id]||q.message,0)});
   const ment=MENTOR_IDS.map(byId).filter(Boolean).map(p=>{const t=CUSTOM_THANKS[p.id]||[p.solution,p.value,p.challenge].find(x=>MENTOR.test(x||''));return t&&card(p,t,0)}).filter(Boolean);
   const out=[];hero.forEach((h,i)=>{out.push(h);if(ment[i])out.push(ment[i])});return out.concat(ment.slice(hero.length)).slice(0,8);
 }
@@ -1383,7 +1394,7 @@ function shapePoints(n,w,h){
 }
 let mosaicDoneAt=0;window.mosaicBusy=()=>performance.now()<mosaicDoneAt;
 const stage=document.getElementById('mosaicStage'),cap=document.getElementById('mosaicCaption');let timers=[];
-function clear(){timers.forEach(clearTimeout);timers=[];mosaicDoneAt=0;const mt=document.getElementById('mThanks');if(mt)mt.innerHTML='';stage.classList.remove('formed');cap.classList.remove('show')}
+function clear(){timers.forEach(clearTimeout);timers=[];mosaicDoneAt=0;const mt=document.getElementById('mThanks');if(mt)mt.innerHTML='';const ms=document.getElementById('mSpot');if(ms){ms.classList.remove('on');ms.innerHTML=''}stage.classList.remove('dim');stage.classList.remove('formed');cap.classList.remove('show')}
 function runMosaic(){
   clear();const w=stage.clientWidth,h=stage.clientHeight;if(!w)return;
   const list=[...people].sort((a,b)=>(!!assetImages[b.portrait])-(!!assetImages[a.portrait]));
@@ -1406,8 +1417,16 @@ function runMosaic(){
   const mt=document.getElementById('mThanks');mt.style.removeProperty('--tq');mt.innerHTML=`<div class="tCol L">${col(0)}</div><div class="tCol R">${col(1)}</div>`;
   {const cs=[...mt.querySelectorAll('.tCol')],over=()=>cs.some(c=>{const k=[...c.children],g=parseFloat(getComputedStyle(c).rowGap)||0;return k.reduce((a,e)=>a+e.offsetHeight,0)+g*(k.length-1)>c.clientHeight+1});let s=parseFloat(getComputedStyle(mt.querySelector('.tCard q')||mt).fontSize)||16;while(over()&&s>12){s-=.5;mt.style.setProperty('--tq',s+'px')}}
   const L=[...document.querySelectorAll('#mThanks .L .tCard')],R=[...document.querySelectorAll('#mThanks .R .tCard')],els=[];for(let i=0;i<Math.max(L.length,R.length);i++){if(L[i])els.push(L[i]);if(R[i])els.push(R[i])}
-  els.forEach((el,k)=>timers.push(setTimeout(()=>el.classList.add('in'),tCards+k*gap)));
-  const tEnd=tCards+els.length*gap+600;
+  // Lần lượt phóng to từng lời tri ân ở giữa màn hình, rồi thu về cột; xong hết mới hiện toàn cảnh
+  const spot=document.getElementById('mSpot');let t=tCards;
+  els.forEach(el=>{
+    const n=(el.querySelector('q')?.textContent||'').length,hold=reduce?0:Math.min(7000,2600+n*18);
+    timers.push(setTimeout(()=>{spot.innerHTML=el.outerHTML.replace('tCard pop','tCard spotCard');spot.classList.add('on');stage.classList.add('dim')},t));
+    timers.push(setTimeout(()=>{spot.classList.remove('on');el.classList.add('in')},t+hold));
+    t+=hold+(reduce?0:700);
+  });
+  timers.push(setTimeout(()=>{stage.classList.remove('dim');spot.innerHTML=''},t));
+  const tEnd=t+600;
   timers.push(setTimeout(()=>cap.classList.add('show'),tEnd));
   mosaicDoneAt=performance.now()+tEnd+4000;
 }

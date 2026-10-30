@@ -838,6 +838,8 @@ function sortPeople(){const r=(l,v)=>{const i=l.indexOf(v);return i<0?l.length:i
  people.sort((x,y)=>r(UNIT_ORDER,x.unit)-r(UNIT_ORDER,y.unit)||r(PIN_ORDER,x.id)-r(PIN_ORDER,y.id)||x.id.localeCompare(y.id))}
 sortPeople();
 const assetImages = JSON.parse(document.getElementById("imageData").textContent);
+// Ảnh nhỏ cho các ô tròn (tải nhanh); ảnh nhập mới từ máy (data:) giữ nguyên
+const thumbOf = src => (src && src.startsWith("assets/hoc-vien/")) ? src.replace("assets/hoc-vien/", "assets/hoc-vien/thumb/") : (src || "");
 const keywords = ["CHỦ ĐỘNG","KỶ LUẬT","KẾT NỐI","BỨT PHÁ","TRÁCH NHIỆM"];
 const scenes = [...document.querySelectorAll(".scene")];
 let currentScene = 0;
@@ -1076,7 +1078,7 @@ function stopAmbient() {
 }
 
 /* Nhạc nền: dùng assets/nhac-nen.mp3 nếu có, không có thì dùng âm thanh tự tạo */
-const bgMusic = new Audio("assets/nhac-nen.mp3");
+const bgMusic = new Audio("assets/nhac-nen.mp3?v=20261030");
 bgMusic.loop = true; bgMusic.preload = "auto"; bgMusic.volume = 0;
 let musicOk = true; bgMusic.onerror = () => { musicOk = false; };
 let fadeT = null;
@@ -1092,7 +1094,7 @@ function setSoundBtn(on) {
 }
 async function startSound() {
   if (musicOk) {
-    try { await bgMusic.play(); fadeMusic(0.85, 2500); setSoundBtn(true); return; } catch (e) { if (e && e.name === 'NotAllowedError') { setSoundBtn(false); return; } musicOk = false; }
+    try { await bgMusic.play(); fadeMusic(0.5, 2500); setSoundBtn(true); return; } catch (e) { if (e && e.name === 'NotAllowedError') { setSoundBtn(false); return; } musicOk = false; }
   }
   startAmbient();
 }
@@ -1115,7 +1117,7 @@ activate(0);
 /* ===== V4 STAGE LAYER: faces everywhere, stage motion, auto-hide controls ===== */
 (function(){
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const photoOf=p=>assetImages[p.portrait]||'';
+const photoOf=p=>thumbOf(assetImages[p.portrait]);
 
 /* A1. Opening face wall: 60 faces, photos twinkle in turn */
 function buildFaceWall(){
@@ -1123,7 +1125,7 @@ function buildFaceWall(){
   wall.replaceChildren(...people.map((p,i)=>{
     const d=document.createElement('div');d.className='face';d.style.setProperty('--i',i);d.title=p.name;
     const src=photoOf(p);
-    if(src){const img=document.createElement('img');img.src=src;img.alt='';img.loading='lazy';d.append(img);d.dataset.photo='1'}
+    if(src){const img=document.createElement('img');img.src=src;img.alt='';img.decoding='async';img.onerror=()=>{img.remove();d.textContent=initials(p.name);delete d.dataset.photo};d.append(img);d.dataset.photo='1'}
     else d.textContent=initials(p.name);
     return d;
   }));
@@ -1295,7 +1297,7 @@ renderSummary=function(){
   </div>
   <div class="sumBody">
    <div class="panel pillarPanel"><h3>Từ khóa hành trình</h3><div class="sub">${shownN(tk.reduce((a,t)=>a+t.people.length,0),list)} ĐÃ CHỌN · ${list.length-tk.reduce((a,t)=>a+t.people.length,0)} CHƯA CHỌN</div>
-    <div class="pillars">${tk.map((t,i)=>`<div class="pillar${t===top&&t.people.length?' pLead':''}"><div class="cnt">${t.people.length}</div><div class="col"><div class="bar" style="--h:${Math.max(4,t.people.length/maxTk*100)};--d:${i}"><div class="faces">${t.people.slice(0,12).map(p=>assetImages[p.portrait]?`<span title="${escapeHtml(p.name)}"><img src="${escapeHtml(assetImages[p.portrait])}" alt=""></span>`:`<span title="${escapeHtml(p.name)}">${escapeHtml(initials(p.name))}</span>`).join('')}</div></div></div><label>${TKC[t.c]}</label><small>${t.c}</small></div>`).join('')}</div></div>
+    <div class="pillars">${tk.map((t,i)=>`<div class="pillar${t===top&&t.people.length?' pLead':''}"><div class="cnt">${t.people.length}</div><div class="col"><div class="bar" style="--h:${Math.max(4,t.people.length/maxTk*100)};--d:${i}"><div class="faces">${t.people.slice(0,12).map(p=>assetImages[p.portrait]?`<span title="${escapeHtml(p.name)}"><img src="${escapeHtml(thumbOf(assetImages[p.portrait]))}" alt=""></span>`:`<span title="${escapeHtml(p.name)}">${escapeHtml(initials(p.name))}</span>`).join('')}</div></div></div><label>${TKC[t.c]}</label><small>${t.c}</small></div>`).join('')}</div></div>
    <div class="rankStack">${rankHtml('Giá trị nhận được','GT','gt',list)}${rankHtml('Thách thức lớn nhất','TT','tt',list)}</div>
   </div>
   <div class="sumFoot">Số liệu chỉ tính học viên đã chọn mã hợp lệ; nội dung còn thiếu không được suy diễn.</div>`;
@@ -1332,7 +1334,7 @@ const fold=t=>String(t||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/
 const box=document.getElementById('finder'),inp=document.getElementById('fInput'),list=document.getElementById('fList');let hits=[],sel=0;
 function openProfile(p){box.hidden=true;if(autoPlay)toggleAuto();const i=scenes.findIndex(s=>s.dataset.label==='PROFILE');profileIndex=people.indexOf(p);activate(i)}
 function render(){const q=fold(inp.value).trim();hits=people.filter(p=>!q||q.split(/\s+/).every(w=>fold(p.name+' '+p.unit+' '+p.id+' lop '+p.class).includes(w))).slice(0,60);sel=Math.min(sel,Math.max(hits.length-1,0));
- list.innerHTML=hits.length?hits.map((p,i)=>{const src=assetImages[p.portrait];return `<button class="fItem${i===sel?' on':''}" data-i="${i}"><span class="av">${src?`<img src="${escapeHtml(src)}" alt="">`:escapeHtml(initials(p.name))}</span><span><b>${escapeHtml(p.name)}</b><small>${escapeHtml(p.id)} · LỚP ${p.class} · ${escapeHtml(p.unit)}</small></span></button>`}).join(''):'<div class="fEmpty">Không tìm thấy học viên.</div>';
+ list.innerHTML=hits.length?hits.map((p,i)=>{const src=thumbOf(assetImages[p.portrait]);return `<button class="fItem${i===sel?' on':''}" data-i="${i}"><span class="av">${src?`<img src="${escapeHtml(src)}" alt="">`:escapeHtml(initials(p.name))}</span><span><b>${escapeHtml(p.name)}</b><small>${escapeHtml(p.id)} · LỚP ${p.class} · ${escapeHtml(p.unit)}</small></span></button>`}).join(''):'<div class="fEmpty">Không tìm thấy học viên.</div>';
  list.querySelector('.on')?.scrollIntoView({block:'nearest'})}
 window.openFinder=function(){box.hidden=false;inp.value='';sel=0;render();inp.focus()};
 inp.addEventListener('input',()=>{sel=0;render()});
@@ -1363,7 +1365,7 @@ addEventListener('resize',fit);const a=activate;activate=function(i){a(i);if(sce
 (function(){
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const byId=id=>people.find(p=>p.id===id);
-function av(p){const img=assetImages[p.portrait];return `<span class="tAv">${img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name))}</span>`}
+function av(p){const img=thumbOf(assetImages[p.portrait]);return `<span class="tAv">${img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name))}</span>`}
 function card(p,text,d){return `<div class="tCard" style="--d:${d}"><q>${escapeHtml(text)}</q><div class="tWho">${av(p)}<span><b>${escapeHtml(p.name)}</b>${escapeHtml(p.unit)}</span></div></div>`}
 // Lời cảm ơn trực tiếp: lấy từ câu nhắn gửi có cảm ơn/biết ơn/tri ân
 const THANK=/cảm ơn|biết ơn|tri ân/i, MENTOR=/mentor|thầy cô|giảng viên/i;
@@ -1403,7 +1405,7 @@ function runMosaic(){
   // gán người có ảnh vào vị trí gần tâm từng nét để chữ rõ
   stage.innerHTML='';
   const tiles=list.map((p,i)=>{const t=document.createElement('div');t.className='mTile';t.style.width=t.style.height=size+'px';t.title=p.name;
-    const img=assetImages[p.portrait];t.innerHTML=img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name));
+    const img=thumbOf(assetImages[p.portrait]);t.innerHTML=img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name));
     const sx=Math.random()*(w-size),sy=Math.random()*(h*.75-size);t.style.transform=`translate(${sx}px,${sy}px) scale(.9)`;stage.append(t);return t});
   const order=tiles.map((_,i)=>i).sort(()=>Math.random()-.5);
   const step=reduce?0:110;
@@ -1463,7 +1465,7 @@ const ISL={hs:[[111.6,16.5],[112.3,16.8],[111.9,16.2],[112.7,16.1],[111.2,15.8],
 const proj=([lon,lat])=>[(lon-MAP.lon0)*MAP.k*MAP.s,(MAP.lat1-lat)*MAP.s];
 const svgEl=document.getElementById('triMap'),grid=document.getElementById('triGrid'),hub=document.getElementById('triHub'),flow=document.getElementById('triFlow'),body=sc.querySelector('.triBody');
 let timers=[];
-function face(p){const img=assetImages[p.portrait];return `<span class="tf" data-id="${escapeHtml(p.id)}" data-city="${cityOf(p)}" title="${escapeHtml(p.name+' · '+p.unit)}">${img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name))}</span>`}
+function face(p){const img=thumbOf(assetImages[p.portrait]);return `<span class="tf" data-id="${escapeHtml(p.id)}" data-city="${cityOf(p)}" title="${escapeHtml(p.name+' · '+p.unit)}">${img?`<img src="${escapeHtml(img)}" alt="">`:escapeHtml(initials(p.name))}</span>`}
 function group(){
  const units=new Map();
  people.forEach(p=>{const u=UNIT[p.unit]||[p.unit||'Khác','HQ','HN'];if(!units.has(u[0]))units.set(u[0],{name:u[0],p:u[1],city:u[2],people:[]});units.get(u[0]).people.push(p)});
@@ -1563,7 +1565,7 @@ const playing=()=>!bgMusic.paused||soundOn;
 function go(e){if(done)return;if(e&&e.target.closest?.('#sound'))return finish();if(playing())return finish();startSound().then(()=>{if(!bgMusic.paused)finish()})}
 function finish(){done=true;['click','touchend','keydown'].forEach(t=>removeEventListener(t,go,true))}
 addEventListener('click',go,true);addEventListener('touchend',go,true);addEventListener('keydown',go,true);
-bgMusic.play().then(()=>{fadeMusic(0.85,2500);setSoundBtn(true);finish()},()=>{});
+bgMusic.play().then(()=>{fadeMusic(0.5,2500);setSoundBtn(true);finish()},()=>{});
 })();
 </script>
 </body>

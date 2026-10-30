@@ -564,11 +564,11 @@ body.calm *,body.calm *:before,body.calm *:after{animation-duration:0s!important
 @media(prefers-reduced-motion:reduce){.tCard{opacity:1!important;transform:none!important;animation:none!important}.mTile{transition:none!important}}
 
 .mThanks{position:absolute;inset:0;pointer-events:none}
-.tCol{position:absolute;top:clamp(96px,12vh,140px);bottom:clamp(110px,15vh,170px);width:clamp(240px,22vw,420px);display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,1.6vh,18px)}
+.tCol{position:absolute;top:clamp(84px,10vh,120px);bottom:clamp(24px,4vh,48px);width:clamp(240px,22vw,420px);display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,1.6vh,18px)}
 .tCol.L{left:clamp(16px,3vw,60px)}.tCol.R{right:clamp(16px,3vw,60px)}
 .tCard.pop{position:relative;opacity:0;transform:scale(.6);transition:opacity .5s,transform .7s cubic-bezier(.2,1.6,.4,1);animation:none!important;backdrop-filter:blur(6px);background:linear-gradient(145deg,rgba(14,40,70,.85),rgba(14,40,70,.6))}
 .tCard.pop.in{opacity:1;transform:none;box-shadow:0 0 30px rgba(104,215,204,.25)}
-.tCard.pop q{font-size:clamp(12px,.9vw,16px)}
+.tCard.pop q{font-size:var(--tq,clamp(12px,.9vw,16px))}
 @media(max-width:980px){.tCol{display:none}}
 
 body.mosaicOn .top{justify-content:center}body.mosaicOn .brandMeta,body.mosaicOn .counter{display:none}
@@ -1359,9 +1359,10 @@ function av(p){const img=assetImages[p.portrait];return `<span class="tAv">${img
 function card(p,text,d){return `<div class="tCard" style="--d:${d}"><q>${escapeHtml(text)}</q><div class="tWho">${av(p)}<span><b>${escapeHtml(p.name)}</b>${escapeHtml(p.unit)}</span></div></div>`}
 // Lời cảm ơn trực tiếp: lấy từ câu nhắn gửi có cảm ơn/biết ơn/tri ân
 const THANK=/cảm ơn|biết ơn|tri ân/i, MENTOR=/mentor|thầy cô|giảng viên/i;
-const MENTOR_IDS=['HV042','HV030','HV022','HV054','HV059','HV028'];
+const MENTOR_IDS=['HV042','HV030','HV054','HV021','HV059','HV028'];
 // Lời tri ân riêng do học viên gửi Ban tổ chức (thay cho câu trích tự động)
-const CUSTOM_THANKS={HV054:'Em cảm ơn chị Thoa vì sự tận tâm, những chia sẻ quý báu và sự đồng hành không chỉ trong hành trình Petrovietnam-NEXT 2025 mà còn trong công việc và cuộc sống. Chúc chị luôn mạnh khỏe, hạnh phúc và mãi giữ ngọn lửa nhiệt huyết để tiếp tục lan tỏa những giá trị tốt đẹp ❤️'};
+const CUSTOM_THANKS={HV054:'Em cảm ơn chị Thoa vì sự tận tâm, những chia sẻ quý báu và sự đồng hành không chỉ trong hành trình Petrovietnam-NEXT 2025 mà còn trong công việc và cuộc sống. Chúc chị luôn mạnh khỏe, hạnh phúc và mãi giữ ngọn lửa nhiệt huyết để tiếp tục lan tỏa những giá trị tốt đẹp ❤️',
+ HV021:'Xin cảm ơn BTC khóa học PV Next 2025, nhất là chị Trà, chị Hương, anh Duy, chị Nhung và ban cán sự lớp; xin tri ân BGĐ KTN, đặc biệt là anh Quang, đã tạo điều kiện và chia sẻ những kinh nghiệm quý báu. Hy vọng chúng em sẽ vận dụng hiệu quả những kiến thức đã học vào các dự án, công việc sắp tới.'};
 function thanksCards(){
   const hero=people.filter(p=>THANK.test(p.message||'')).slice(0,4).map(p=>card(p,p.message,0));
   const ment=MENTOR_IDS.map(byId).filter(Boolean).map(p=>{const t=CUSTOM_THANKS[p.id]||[p.solution,p.value,p.challenge].find(x=>MENTOR.test(x||''));return t&&card(p,t,0)}).filter(Boolean);
@@ -1399,8 +1400,11 @@ function runMosaic(){
   const tForm=400+order.length*step+500;
   timers.push(setTimeout(()=>{tiles.forEach((t,i)=>{const [x,y]=sh.pts[i];t.style.transitionDelay=(reduce?0:(i%12)*0.04)+'s';t.style.transform=`translate(${x-size/2}px,${y-size/2}px) scale(1)`});stage.classList.add('formed')},tForm));
   const tCards=tForm+(reduce?0:3000),cards=thanksCards(),gap=reduce?0:1300;
-  const col=r=>cards.map((c,i)=>i%2===r?c.replace('class="tCard"','class="tCard pop"'):'').join('');
-  document.getElementById('mThanks').innerHTML=`<div class="tCol L">${col(0)}</div><div class="tCol R">${col(1)}</div>`;
+  // chia thẻ sang hai cột theo độ dài chữ cho cân, rồi co chữ nếu cột vẫn tràn
+  const side=[],len=[0,0],sz=cards.map(c=>c.replace(/<[^>]+>/g,'').length+120);sz.map((n,i)=>i).sort((a,b)=>sz[b]-sz[a]).forEach(i=>{const k=len[0]<=len[1]?0:1;side[i]=k;len[k]+=sz[i]});
+  const col=r=>cards.map((c,i)=>side[i]===r?c.replace('class="tCard"','class="tCard pop"'):'').join('');
+  const mt=document.getElementById('mThanks');mt.style.removeProperty('--tq');mt.innerHTML=`<div class="tCol L">${col(0)}</div><div class="tCol R">${col(1)}</div>`;
+  {const cs=[...mt.querySelectorAll('.tCol')],over=()=>cs.some(c=>{const k=[...c.children],g=parseFloat(getComputedStyle(c).rowGap)||0;return k.reduce((a,e)=>a+e.offsetHeight,0)+g*(k.length-1)>c.clientHeight+1});let s=parseFloat(getComputedStyle(mt.querySelector('.tCard q')||mt).fontSize)||16;while(over()&&s>12){s-=.5;mt.style.setProperty('--tq',s+'px')}}
   const L=[...document.querySelectorAll('#mThanks .L .tCard')],R=[...document.querySelectorAll('#mThanks .R .tCard')],els=[];for(let i=0;i<Math.max(L.length,R.length);i++){if(L[i])els.push(L[i]);if(R[i])els.push(R[i])}
   els.forEach((el,k)=>timers.push(setTimeout(()=>el.classList.add('in'),tCards+k*gap)));
   const tEnd=tCards+els.length*gap+600;

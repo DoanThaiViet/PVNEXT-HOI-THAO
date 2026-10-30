@@ -1078,8 +1078,8 @@ function stopAmbient() {
 }
 
 /* Nhạc nền: dùng assets/nhac-nen.mp3 nếu có, không có thì dùng âm thanh tự tạo */
-const bgMusic = new Audio("assets/nhac-nen.mp3?v=20261030");
-bgMusic.loop = true; bgMusic.preload = "auto"; bgMusic.volume = 0;
+const bgMusic = new Audio("assets/nhac-nen.mp3?v=20261030b");
+bgMusic.loop = true; bgMusic.preload = "metadata"; bgMusic.volume = 0;
 let musicOk = true; bgMusic.onerror = () => { musicOk = false; };
 let fadeT = null;
 function fadeMusic(to, ms) {

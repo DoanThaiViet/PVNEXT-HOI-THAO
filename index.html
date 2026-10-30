@@ -1084,7 +1084,7 @@ function setSoundBtn(on) {
 }
 async function startSound() {
   if (musicOk) {
-    try { await bgMusic.play(); fadeMusic(0.6, 2500); setSoundBtn(true); return; } catch (e) { musicOk = false; }
+    try { await bgMusic.play(); fadeMusic(0.85, 2500); setSoundBtn(true); return; } catch (e) { if (e && e.name === 'NotAllowedError') { setSoundBtn(false); return; } musicOk = false; }
   }
   startAmbient();
 }
@@ -1535,10 +1535,10 @@ addEventListener('pointerdown',go,true);addEventListener('keydown',go,true);
 (function(){
 let done=false;
 const playing=()=>!bgMusic.paused||soundOn;
-function go(e){if(done)return;if(e&&e.target.closest?.('#sound'))return finish();if(playing())return finish();startSound();finish()}
-function finish(){done=true;removeEventListener('pointerdown',go,true);removeEventListener('keydown',go,true)}
-addEventListener('pointerdown',go,true);addEventListener('keydown',go,true);
-bgMusic.play().then(()=>{fadeMusic(0.6,2500);setSoundBtn(true);finish()},()=>{});
+function go(e){if(done)return;if(e&&e.target.closest?.('#sound'))return finish();if(playing())return finish();startSound().then(()=>{if(!bgMusic.paused)finish()})}
+function finish(){done=true;['click','touchend','keydown'].forEach(t=>removeEventListener(t,go,true))}
+addEventListener('click',go,true);addEventListener('touchend',go,true);addEventListener('keydown',go,true);
+bgMusic.play().then(()=>{fadeMusic(0.85,2500);setSoundBtn(true);finish()},()=>{});
 })();
 </script>
 </body>

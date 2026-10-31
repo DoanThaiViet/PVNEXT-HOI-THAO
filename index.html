@@ -1568,5 +1568,39 @@ addEventListener('click',go,true);addEventListener('touchend',go,true);addEventL
 bgMusic.play().then(()=>{fadeMusic(0.5,2500);setSoundBtn(true);finish()},()=>{});
 })();
 </script>
+<script id="v15-clicker">
+/* Điều khiển bằng bút trình chiếu (pointer) và chuột:
+   - Bút trình chiếu gửi PageDown/PageUp (hoặc mũi tên) → chuyển slide, kể cả khi vừa bấm một nút trên trang.
+   - Chuột trái vào vùng trống → slide sau; chuột phải → slide trước. Chạm màn hình không chuyển để còn cuộn. */
+(function(){
+const busy=()=>!document.getElementById('dataPanel').hidden||(document.getElementById('finder')&&!document.getElementById('finder').hidden);
+const typing=t=>t.closest&&t.closest('input,textarea,select,[contenteditable]');
+addEventListener('keydown',e=>{
+  if(typing(e.target)||busy())return;
+  const onBtn=e.target.closest&&e.target.closest('button,a');
+  let dir=0;
+  if(e.key==='PageDown'||e.key==='ArrowDown')dir=1;
+  else if(e.key==='PageUp'||e.key==='ArrowUp')dir=-1;
+  else if(onBtn&&e.key==='ArrowRight')dir=1;
+  else if(onBtn&&e.key==='ArrowLeft')dir=-1;
+  if(!dir)return;
+  e.preventDefault();if(onBtn)onBtn.blur();
+  dir>0?nextScene():prevScene();
+});
+const INTERACTIVE='button,a,input,textarea,select,label,.controls,#dataPanel,#finder,.tf,.triUnit,.fItem,.personChip,.face,.mTile,.tCard';
+addEventListener('click',e=>{
+  if(e.button!==0||(e.pointerType&&e.pointerType!=='mouse'))return;
+  if(busy()||e.target.closest(INTERACTIVE))return;
+  if(getSelection&&String(getSelection()).length)return;
+  nextScene();
+});
+addEventListener('contextmenu',e=>{
+  if(busy()||e.target.closest('input,textarea,#dataPanel,#finder'))return;
+  e.preventDefault();prevScene();
+});
+// bấm nút điều khiển xong thì bỏ focus để bút trình chiếu vẫn hoạt động
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(b)setTimeout(()=>b.blur(),0)});
+})();
+</script>
 </body>
 </html>

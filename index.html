@@ -661,6 +661,8 @@ body.calm .tmCity .halo{display:none}body.calm .tmShine,body.calm .tmTw{display:
 .mSpot .tWho{margin-top:18px;font-size:clamp(13px,1vw,18px)}
 .mSpot .tAv{width:clamp(44px,3.4vw,64px)}
 .mosaicStage.dim .mTile{opacity:.28!important;filter:saturate(.6)}
+/* Trình chiếu thủ công: ẩn nút AUTO */
+#auto{display:none!important}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="finder" hidden role="dialog" aria-label="Tìm học viên"><div class="fBox"><input id="fInput" type="search" placeholder="Gõ tên, đơn vị hoặc mã HV… (không cần dấu)" autocomplete="off"><div id="fList"></div></div></div><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
@@ -814,7 +816,7 @@ body.calm .tmCity .halo{display:none}body.calm .tmShine,body.calm .tmTw{display:
     </div>
   </section>
 
-  <div class="hint">← → chuyển cảnh · Space tự chạy/dừng · F toàn màn hình · SOUND để bật/tắt âm thanh</div>
+  <div class="hint">← → chuyển cảnh · Space hoặc bút trình chiếu sang slide · F toàn màn hình · SOUND để bật/tắt âm thanh</div>
   <div class="controls">
     <button id="showSummary">TỔNG HỢP</button><button id="dataToggle">DỮ LIỆU</button><button id="home">⌂ TRANG CHỦ</button><button id="videoToggle" aria-label="Tạm dừng video nền">Ⅱ NỀN</button>
     <button id="prev">← PREV</button>
@@ -957,7 +959,7 @@ addEventListener("keydown", e => {
   if(e.target.closest("button,a,input,textarea,select")||!document.getElementById("dataPanel").hidden)return;
   if (e.key === "ArrowRight") nextScene();
   if (e.key === "ArrowLeft") prevScene();
-  if (e.code === "Space") { e.preventDefault(); toggleAuto(); }
+  if (e.code === "Space") { e.preventDefault(); nextScene(); }
   if (e.key.toLowerCase() === "f") document.documentElement.requestFullscreen?.();
 });
 

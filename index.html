@@ -674,6 +674,17 @@ body.calm .tmCity .halo{display:none}body.calm .tmShine,body.calm .tmTw{display:
 @media(max-width:980px){.mSpot{width:calc(100vw - 32px);top:50%}.mSpot .tCard q{font-size:clamp(16px,4.4vw,22px)!important}.mSpot .tWho{font-size:14px}}
 #iosHint{position:fixed;left:12px;right:12px;bottom:calc(90px + env(safe-area-inset-bottom));z-index:900;padding:14px 16px;border-radius:16px;background:rgba(8,22,40,.96);border:1px solid rgba(104,215,204,.45);color:#EEF5FF;font:500 14px/1.5 var(--display);box-shadow:0 18px 50px rgba(0,0,0,.5);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s;pointer-events:none}
 #iosHint.on{opacity:1;transform:none;pointer-events:auto}
+/* Điện thoại: dải nền dưới thanh tiêu đề để nội dung cuộn không đè chữ */
+@media(max-width:980px),(max-height:520px){
+ .top::before{content:"";position:absolute;left:-40px;right:-40px;top:-40px;bottom:-34px;background:linear-gradient(180deg,rgba(2,8,18,.97) 66%,rgba(2,8,18,0));z-index:-1;pointer-events:none}
+}
+/* Điện thoại xoay ngang: chừa chỗ cho thanh nút */
+@media(max-height:520px){
+ .nextGen{display:none}
+ .mosaicCaption{bottom:60px}.mosaicCaption .eyebrow{display:none}.mosaicQuote{font-size:clamp(20px,6vh,30px)}
+ .closingTitle{font-size:clamp(28px,9vh,46px)!important}.stats{margin-top:10px}.stat b{font-size:clamp(28px,9vh,44px)}
+ .closing .wordline{margin-top:8px;font-size:14px}
+}
 </style></head>
 <body>
 <aside id="dataPanel" hidden aria-label="Nhập dữ liệu học viên"><button id="closeData" aria-label="Đóng bảng dữ liệu">× Đóng</button><h2>Dữ liệu học viên</h2><p>Nhập file Excel theo mẫu và ảnh gốc. Dữ liệu chỉ xử lý trên trình duyệt này.</p><label>NHẬP EXCEL<input id="excelInput" type="file" accept=".xlsx"></label><label>NHẬP ẢNH<input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.webp" multiple></label><button id="saveData">LƯU BẢN HTML</button><p>Ảnh phải có tên trùng với cột ảnh trong Excel. Nhập xong, bấm LƯU BẢN HTML để giữ dữ liệu và ảnh; tải lại trang khi chưa lưu sẽ mất phần vừa nhập.</p><p id="importStatus" role="status" aria-live="polite"></p></aside><div id="finder" hidden role="dialog" aria-label="Tìm học viên"><div class="fBox"><input id="fInput" type="search" placeholder="Gõ tên, đơn vị hoặc mã HV… (không cần dấu)" autocomplete="off"><div id="fList"></div></div></div><div id="app"><video id="sharedLandscape" autoplay loop muted playsinline preload="auto" aria-hidden="true" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
